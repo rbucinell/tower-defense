@@ -1,2 +1,2 @@
-# tower-defense
-Simple tower defense game
+# TowerDefenseGame
+A simple tower defense game to practice Javascript skills

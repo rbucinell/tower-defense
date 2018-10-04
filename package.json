@@ -1,0 +1,25 @@
+{
+  "name": "tower-defense",
+  "version": "0.0.1",
+  "description": "A simple tower defense game to practice JS coding",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rbucinell/tower-defense.git"
+  },
+  "keywords": [
+    "tower",
+    "defense",
+    "game",
+    "javascript"
+  ],
+  "author": "Ryan Bucinell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rbucinell/tower-defense/issues"
+  },
+  "homepage": "https://github.com/rbucinell/tower-defense#readme"
+}
