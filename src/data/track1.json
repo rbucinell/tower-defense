@@ -1,0 +1,160 @@
+{
+    "name": "Intro Track",
+    "difficulty": "1",
+    "map": {
+        "atlas_map": "img/spritesheet.png",
+        "atlas_data": "data/spritesheet.xml",
+        "tile_width": "64",
+        "tile_height": "64",
+        "map_tile_width": "7",
+        "map_tile_height": "7",
+
+        "base_color": "lightcyan",
+        "background_img": "img/track1.png",
+        "terrain": [
+
+            { "texture_name": "mapTile_006.png", "x": 0, "y": 0 },
+            { "texture_name": "mapTile_021.png", "x": 0, "y": 1 },
+            { "texture_name": "mapTile_021.png", "x": 0, "y": 2 },
+            { "texture_name": "mapTile_021.png", "x": 0, "y": 3 },
+            { "texture_name": "mapTile_021.png", "x": 0, "y": 4 },
+            { "texture_name": "mapTile_021.png", "x": 0, "y": 5 },
+            { "texture_name": "mapTile_021.png", "x": 0, "y": 6 },
+            { "texture_name": "mapTile_036.png", "x": 0, "y": 7 },
+
+            { "texture_name": "mapTile_007.png", "x": 1, "y": 0 },
+            { "texture_name": "mapTile_022.png", "x": 1, "y": 1 },
+            { "texture_name": "mapTile_022.png", "x": 1, "y": 2 },
+            { "texture_name": "mapTile_022.png", "x": 1, "y": 3 },
+            { "texture_name": "mapTile_022.png", "x": 1, "y": 4 },
+            { "texture_name": "mapTile_022.png", "x": 1, "y": 5 },
+            { "texture_name": "mapTile_022.png", "x": 1, "y": 6 },
+            { "texture_name": "mapTile_037.png", "x": 1, "y": 7 },
+
+            { "texture_name": "mapTile_007.png", "x": 2, "y": 0 },
+            { "texture_name": "mapTile_022.png", "x": 2, "y": 1 },
+            { "texture_name": "mapTile_022.png", "x": 2, "y": 2 },
+            { "texture_name": "mapTile_022.png", "x": 2, "y": 3 },
+            { "texture_name": "mapTile_022.png", "x": 2, "y": 4 },
+            { "texture_name": "mapTile_022.png", "x": 2, "y": 5 },
+            { "texture_name": "mapTile_022.png", "x": 2, "y": 6 },
+            { "texture_name": "mapTile_037.png", "x": 2, "y": 7 },
+
+            { "texture_name": "mapTile_007.png", "x": 3, "y": 0 },
+            { "texture_name": "mapTile_022.png", "x": 3, "y": 1 },
+            { "texture_name": "mapTile_022.png", "x": 3, "y": 2 },
+            { "texture_name": "mapTile_022.png", "x": 3, "y": 3 },
+            { "texture_name": "mapTile_022.png", "x": 3, "y": 4 },
+            { "texture_name": "mapTile_022.png", "x": 3, "y": 5 },
+            { "texture_name": "mapTile_022.png", "x": 3, "y": 6 },
+            { "texture_name": "mapTile_037.png", "x": 3, "y": 7 },
+
+            { "texture_name": "mapTile_007.png", "x": 4, "y": 0 },
+            { "texture_name": "mapTile_022.png", "x": 4, "y": 1 },
+            { "texture_name": "mapTile_022.png", "x": 4, "y": 2 },
+            { "texture_name": "mapTile_022.png", "x": 4, "y": 3 },
+            { "texture_name": "mapTile_022.png", "x": 4, "y": 4 },
+            { "texture_name": "mapTile_022.png", "x": 4, "y": 5 },
+            { "texture_name": "mapTile_022.png", "x": 4, "y": 6 },
+            { "texture_name": "mapTile_037.png", "x": 4, "y": 7 },
+
+            { "texture_name": "mapTile_007.png", "x": 5, "y": 0 },
+            { "texture_name": "mapTile_022.png", "x": 5, "y": 1 },
+            { "texture_name": "mapTile_022.png", "x": 5, "y": 2 },
+            { "texture_name": "mapTile_022.png", "x": 5, "y": 3 },
+            { "texture_name": "mapTile_022.png", "x": 5, "y": 4 },
+            { "texture_name": "mapTile_022.png", "x": 5, "y": 5 },
+            { "texture_name": "mapTile_022.png", "x": 5, "y": 6 },
+            { "texture_name": "mapTile_037.png", "x": 5, "y": 7 },
+
+            { "texture_name": "mapTile_007.png", "x": 6, "y": 0 },
+            { "texture_name": "mapTile_022.png", "x": 6, "y": 1 },
+            { "texture_name": "mapTile_022.png", "x": 6, "y": 2 },
+            { "texture_name": "mapTile_022.png", "x": 6, "y": 3 },
+            { "texture_name": "mapTile_022.png", "x": 6, "y": 4 },
+            { "texture_name": "mapTile_022.png", "x": 6, "y": 5 },
+            { "texture_name": "mapTile_022.png", "x": 6, "y": 6 },
+            { "texture_name": "mapTile_037.png", "x": 6, "y": 7 },
+
+            { "texture_name": "mapTile_008.png", "x": 7, "y": 0 },
+            { "texture_name": "mapTile_023.png", "x": 7, "y": 1 },
+            { "texture_name": "mapTile_023.png", "x": 7, "y": 2 },
+            { "texture_name": "mapTile_023.png", "x": 7, "y": 3 },
+            { "texture_name": "mapTile_023.png", "x": 7, "y": 4 },
+            { "texture_name": "mapTile_023.png", "x": 7, "y": 5 },
+            { "texture_name": "mapTile_023.png", "x": 7, "y": 6 },
+            { "texture_name": "mapTile_038.png", "x": 7, "y": 7 }
+        ],
+        "path": {
+            "spawn": { "x": 4, "y": -1 },
+            "tiles": [
+                { "texture_name": "mapTile_126.png", "x": 4, "y": 0 },
+                { "texture_name": "mapTile_140.png", "x": 4, "y": 1 },
+                { "texture_name": "mapTile_127.png", "x": 5, "y": 1 },
+                { "texture_name": "mapTile_124.png", "x": 6, "y": 1 },
+                { "texture_name": "mapTile_141.png", "x": 6, "y": 2 },
+                { "texture_name": "mapTile_127.png", "x": 5, "y": 2 },
+                { "texture_name": "mapTile_127.png", "x": 5, "y": 2 },
+                { "texture_name": "mapTile_123.png", "x": 4, "y": 2 },
+                { "texture_name": "mapTile_126.png", "x": 4, "y": 3 },
+                { "texture_name": "mapTile_140.png", "x": 4, "y": 4 },
+                { "texture_name": "mapTile_127.png", "x": 5, "y": 4 },
+                { "texture_name": "mapTile_124.png", "x": 6, "y": 4 },
+                { "texture_name": "mapTile_126.png", "x": 6, "y": 5 },
+                { "texture_name": "mapTile_141.png", "x": 6, "y": 6 },
+                { "texture_name": "mapTile_127.png", "x": 5, "y": 6 },
+                { "texture_name": "mapTile_127.png", "x": 4, "y": 6 },
+                { "texture_name": "mapTile_127.png", "x": 3, "y": 6 },
+                { "texture_name": "mapTile_127.png", "x": 2, "y": 6 },
+                { "texture_name": "mapTile_127.png", "x": 1, "y": 6 },
+                { "texture_name": "mapTile_140.png", "x": 0, "y": 6 },
+
+                { "texture_name": "mapTile_123.png", "x": 0, "y": 5 },
+                { "texture_name": "mapTile_127.png", "x": 1, "y": 5 },
+                { "texture_name": "mapTile_127.png", "x": 2, "y": 5 },
+                { "texture_name": "mapTile_141.png", "x": 3, "y": 5 },
+
+                { "texture_name": "mapTile_126.png", "x": 3, "y": 4 },
+                { "texture_name": "mapTile_126.png", "x": 3, "y": 3 },
+                { "texture_name": "mapTile_126.png", "x": 3, "y": 2 },
+                { "texture_name": "mapTile_124.png", "x": 3, "y": 1 },
+
+                { "texture_name": "mapTile_127.png", "x": 2, "y": 1 },
+                { "texture_name": "mapTile_123.png", "x": 1, "y": 1 },
+
+                { "texture_name": "mapTile_126.png", "x": 1, "y": 2 },
+                { "texture_name": "mapTile_141.png", "x": 1, "y": 3 },
+
+                { "texture_name": "mapTile_181.png", "x": 0, "y": 3 }
+            ]
+        },
+        "objects": [{
+                "texture_name": "mapTile_100.png",
+                "x": 0,
+                "y": 2.8,
+                "comments": "2.8 should be 3, just adjusting it slightly for better image quality"
+            },
+            { "texture_name": "mapTile_115.png", "x": 2, "y": 3 },
+            { "texture_name": "mapTile_115.png", "x": 4, "y": 5 }
+        ],
+        "foreground": [
+
+        ]
+    },
+    "waves": [{
+            "name": "Wave 1",
+            "hint": "Stop all enemies from reaching your base!",
+            "enemies": [
+                { "type": "red", "qty": "10" }
+            ]
+        },
+        {
+            "name": "Second Wave",
+            "hint": "Now with some variety",
+            "enemies": [
+                { "type": "red", "qty": "10" },
+                { "type": "orange", "qty": "5" }
+            ]
+        }
+    ]
+}
