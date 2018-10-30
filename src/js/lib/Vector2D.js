@@ -26,6 +26,19 @@ export default class Vector2D
 		return Math.toDeg( Math.acos( this.x / this.mag() ) );
 	}
 
+	multiply( vec )
+	{
+		const newVec = Vector2D.multiply(this, vec);
+		this.x = newVec.x;
+		this.y = newVec.y;
+	}
+
+	multiply( scalar )
+	{
+		this.x *= scalar;
+		this.y *= scalar;
+	}
+
 	static add( v1, v2 )
 	{
 		return new Vector2D( v1.x + v2.x, v2.y + v2.y );
@@ -43,7 +56,14 @@ export default class Vector2D
 
 	static normal(vec)
 	{
-		return new Vector2D( vec.x / vec.mag(), vec.y / vec.mag() );
+		const m = vec.mag();
+		
+		return new Vector2D( m === 0 ? 0 : vec.x / m, m === 0 ? 0 : vec.y / m);
+	}
+
+	static dist( v1, v2 )
+	{
+		return Math.sqrt( Math.pow(v2.x-v1.x, 2) + Math.pow(v2.y-v1.y, 2) );
 	}
 
 	static CreateFromRadialCord( r, deg )

@@ -56,13 +56,27 @@ export class Enemy extends Entity
             return;
         }
 
+        
         var nextPoint = this.Path[this.curTarget];
 
         var nextPtVec = new Vector2D( nextPoint.x, nextPoint.y );
-        let dirVec = Vector2D.normal( Vector2D.sub(nextPoint,this.posVec));
+        let dirVec = Vector2D.normal( Vector2D.sub(this.posVec,nextPoint));
 
+        let dist = Vector2D.dist( nextPtVec, this.posVec );
+        dirVec.multiply( dist <= this.spd ? dist : this.spd );
+        if( this.Id === 1)
+        {
+            console.log( this.pos );
+            console.log( nextPtVec, dirVec);
+        }
 
+        this.pos.x += Math.floor(dirVec.x);
+        this.pos.y += Math.floor(dirVec.y);
+        this.posVec = new Vector2D( this.pos.x, this.pos.y );
 
+        if( this.posVec.x === nextPoint.x && this.posVec.y === nextPoint.y )
+            this.curTarget++;
+        /*
         var atX = false, atY = false;
 
         var xdist = Math.abs( this.pos.x - nextPoint.x );
@@ -92,7 +106,7 @@ export class Enemy extends Entity
                 this.AtGoal = true;
                 this.curTarget--;//keep this at end to prevent index out of bounds
             }
-        }
+        }*/
     }
 
     /**
