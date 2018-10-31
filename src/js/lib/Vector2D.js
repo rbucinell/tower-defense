@@ -6,6 +6,11 @@ export default class Vector2D
 		this.y = y;
 	}
 
+	toString()
+	{
+		return `<${this.x}, ${this.y}>`;
+	}
+
 	dot( vector )
 	{
 		return this.x * vector.x + this.y * vector.y;
@@ -41,7 +46,7 @@ export default class Vector2D
 
 	static add( v1, v2 )
 	{
-		return new Vector2D( v1.x + v2.x, v2.y + v2.y );
+		return new Vector2D( v1.x + v2.x, v1.y + v2.y );
 	}
 
 	static sub( v1, v2 )
