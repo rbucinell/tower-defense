@@ -45,6 +45,7 @@ export class Enemy extends Entity
      */
     update()
     {
+        console.log( this.Id, this.posVec, this.curTarget)
         //don't move until flagged to go
         if( !this.isMoving )
             return;
@@ -64,11 +65,6 @@ export class Enemy extends Entity
 
         let dist = Vector2D.dist( nextPtVec, this.posVec );
         dirVec.multiply( dist <= this.spd ? dist : this.spd );
-        if( this.Id === 1)
-        {
-            console.log( this.pos );
-            console.log( nextPtVec, dirVec);
-        }
 
         this.pos.x += Math.floor(dirVec.x);
         this.pos.y += Math.floor(dirVec.y);
@@ -80,7 +76,14 @@ export class Enemy extends Entity
 
 
         if( xdist <= this.w/4 && ydist <= this.w/4)
+        {
             this.curTarget++;
+            if( this.curTarget === this.Path.length )
+            {
+                this.AtGoal = true;
+                this.curTarget--;//keep this at end to prevent index out of bounds
+            }
+        }
         /*
         var atX = false, atY = false;
 
