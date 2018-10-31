@@ -74,7 +74,12 @@ export class Enemy extends Entity
         this.pos.y += Math.floor(dirVec.y);
         this.posVec = new Vector2D( this.pos.x, this.pos.y );
 
-        if( this.posVec.x === nextPoint.x && this.posVec.y === nextPoint.y )
+
+        const xdist = Math.abs( this.posVec.x - nextPoint.x );
+        const ydist = Math.abs( this.posVec.y - nextPoint.y );
+
+
+        if( xdist <= this.w/4 && ydist <= this.w/4)
             this.curTarget++;
         /*
         var atX = false, atY = false;
