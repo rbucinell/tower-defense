@@ -13,17 +13,17 @@ export default class Vector2D
 
 	dot( vector )
 	{
-		return this.x * vector.x + this.y * vector.y;
+		return Math.roundToTwo(this.x * vector.x + this.y * vector.y);
 	}
 
 	mag()
 	{
-		return Math.sqrt( Math.pow( this.x, 2) + Math.pow( this.y, 2 ) );
+		return Math.roundToTwo(Math.sqrt( Math.pow( this.x, 2) + Math.pow( this.y, 2 ) ));
 	}
 
 	normal()
 	{
-		return new Vector2D( this.x / this.mag(), this.y / this.mag() );
+		return new Vector2D( Math.roundToTwo(this.x / this.mag()), Math.roundToTwo(this.y / this.mag()) );
 	}
 
 	rot()
@@ -56,7 +56,7 @@ export default class Vector2D
 
 	static multiply(v1, v2 )
 	{
-		return new Vector2D( v2.x * v1.x, v2.y * v1.y );
+		return new Vector2D( Math.roundToTwo(v2.x * v1.x), Math.roundToTwo(v2.y * v1.y) );
 	}
 
 	static normal(vec)
@@ -68,7 +68,7 @@ export default class Vector2D
 
 	static dist( v1, v2 )
 	{
-		return Math.sqrt( Math.pow(v2.x-v1.x, 2) + Math.pow(v2.y-v1.y, 2) );
+		return Math.roundToTwo(Math.sqrt( Math.pow(v2.x-v1.x, 2) + Math.pow(v2.y-v1.y, 2) ));
 	}
 
 	static CreateFromRadialCord( r, deg )
@@ -111,4 +111,9 @@ Math.toRad = function( degree )
 Math.toDeg = function( radian )
 {
 	return radian * ( 180/ Math.PI );
+}
+
+Math.roundToTwo = function( num )
+{
+	return +(Math.round(num+ "e+2") + "e-2");
 }
