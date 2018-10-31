@@ -56,17 +56,21 @@ export default class Wave
 	{
 		if( !this.isStarted )
 			return;
-		this.Enemies.forEach( (e) => {
+
+		
+
+
+		this.Enemies.forEach( (e,i) => {
 			if( !e.isMoving )
 				if( e.StartTime < game_time ) 
-					e.isMoving = true;
+					this.Enemies[i].isMoving = true;
 			if( (typeof e === 'undefined' || e.AtGoal || e.Health <= 0) && e.Despawn == false)
 			{
-				e.Despawn = true;
+				this.Enemies[i].Despawn = true;
 			}
 		});
-		this.Enemies = this.Enemies.filter( (el) => !el.Despawn );
-		this.Enemies.forEach( (e) => e.update());		
+		this.Enemies = this.Enemies.filter( el => !el.Despawn );
+		this.Enemies.forEach( (e,i) => this.Enemies[i].update());		
 	}
 
 	draw( ctx )
