@@ -29,10 +29,7 @@ export class Enemy extends Entity
     set Path ( path )
     {
         this._path = path.slice();
-        var startingPoint = this._path.shift();
-        this.posVec = startingPoint;
-        this.posVec.x = startingPoint.x;
-        this.posVec.y = startingPoint.y;
+        this.posVec = this._path.shift();
     }
 
     get Path() { return this._path; }
@@ -45,7 +42,6 @@ export class Enemy extends Entity
      */
     update()
     {
-        //console.log( this.Id, this.posVec, this.curTarget)
         //don't move until flagged to go
         if( !this.isMoving )
             return;
@@ -57,23 +53,15 @@ export class Enemy extends Entity
             return;
         }
 
-        
-        var nextPoint = this.Path[this.curTarget];
+        let next_vec = new Vector2D( this.Path[this.curTarget].x, this.Path[this.curTarget].y);
+        let next_dir = Vector2D.normal( Vector2D.sub(this.posVec, next_vec));
+        let dist = Vector2D.dist( next_vec, this.posVec);
+        next_dir.multiply( dist <= this.spd ? dist : this.spd );
 
-        var nextPtVec = new Vector2D( nextPoint.x, nextPoint.y );
-        let dirVec = Vector2D.normal( Vector2D.sub(this.posVec,nextPoint));
+        this.posVec = Vector2D.add( this.posVec, next_dir );
 
-        let dist = Vector2D.dist( nextPtVec, this.posVec );
-        dirVec.multiply( dist <= this.spd ? dist : this.spd );
-
-        this.posVec.x += Math.floor(dirVec.x);
-        this.posVec.y += Math.floor(dirVec.y);
-        this.posVec = new Vector2D( this.posVec.x, this.posVec.y );
-
-
-        const xdist = Math.abs( this.posVec.x - nextPoint.x );
-        const ydist = Math.abs( this.posVec.y - nextPoint.y );
-
+        const xdist = Math.abs( this.posVec.x - next_vec.x );
+        const ydist = Math.abs( this.posVec.y - next_vec.y );
 
         if( xdist <= this.w/4 && ydist <= this.w/4)
         {
@@ -84,37 +72,6 @@ export class Enemy extends Entity
                 this.curTarget--;//keep this at end to prevent index out of bounds
             }
         }
-        /*
-        var atX = false, atY = false;
-
-        var xdist = Math.abs( this.posVec.x - nextPoint.x );
-        if( xdist > this.spd )
-            xdist = this.spd
-        if( xdist === 0)
-            atX = true;
-        else
-            this.posVec.x = ( this.posVec.x > nextPoint.x ) 
-                ? this.posVec.x - xdist 
-                : this.posVec.x + xdist;
-
-        var ydist = Math.abs( this.posVec.y - nextPoint.y );
-        if( ydist > this.spd )
-            ydist = this.spd;
-        if( ydist === 0 )
-            atY = true;
-        else
-            this.posVec.y = ( this.posVec.y > nextPoint.y )
-                ? this.posVec.y - ydist
-                : this.posVec.y + ydist;
-        if( atX && atY )
-        {
-            this.curTarget++;
-            if( this.curTarget === this.Path.length )
-            {
-                this.AtGoal = true;
-                this.curTarget--;//keep this at end to prevent index out of bounds
-            }
-        }*/
     }
 
     /**
