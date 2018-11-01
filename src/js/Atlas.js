@@ -20,7 +20,8 @@ export default class Atlas
 				fetch(dataFile).
 					then((response) => response.text()).
 					then( (text) => {
-						this.ReadXml( $.parseXML(text)); // eslint-disable-line
+						var oDOM = (new DOMParser()).parseFromString(text, "application/xml");
+						this.ReadXml(oDOM); // eslint-disable-line
 						if( typeof trackMapReference !== 'undefined' )
 							trackMapReference.LoadTiles();
 					});
@@ -67,6 +68,6 @@ export default class Atlas
 	 */
 	getTextureByName( textureName )
 	{
-		return $.grep(this.Textures, function(e){ return e.Name == textureName; })[0]; // eslint-disable-line
+		return this.Textures.filter( t => t.Name == textureName )[0];
 	}
 }
