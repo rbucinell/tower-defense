@@ -29,7 +29,7 @@ export class Enemy extends Entity
     set Path ( path )
     {
         this._path = path.slice();
-        this.posVec = this._path.shift();
+        this.pos = this._path.shift();
     }
 
     get Path() { return this._path; }
@@ -53,15 +53,15 @@ export class Enemy extends Entity
             return;
         }
 
-        let next_vec = new Vector2D( this.Path[this.curTarget].x, this.Path[this.curTarget].y);
-        let next_dir = Vector2D.normal( Vector2D.sub(this.posVec, next_vec));
-        let dist = Vector2D.dist( next_vec, this.posVec);
+        const next_vec = new Vector2D( this.Path[this.curTarget].x, this.Path[this.curTarget].y);
+        let next_dir = Vector2D.normal( Vector2D.sub(this.pos, next_vec));
+        const dist = Vector2D.dist( next_vec, this.pos);
         next_dir.multiply( dist <= this.spd ? dist : this.spd );
 
-        this.posVec = Vector2D.add( this.posVec, next_dir );
+        this.pos = Vector2D.add( this.pos, next_dir );
 
-        const xdist = Math.abs( this.posVec.x - next_vec.x );
-        const ydist = Math.abs( this.posVec.y - next_vec.y );
+        const xdist = Math.abs( this.pos.x - next_vec.x );
+        const ydist = Math.abs( this.pos.y - next_vec.y );
 
         if( xdist <= this.w/4 && ydist <= this.w/4)
         {
@@ -84,8 +84,8 @@ export class Enemy extends Entity
     {
         if( !this.Despawn)
         {
-            ctx.fillStyle = this.Color
-            ctx.fillRect(this.posVec.x - this.w / 2, this.posVec.y - this.h / 2, this.w, this.h);
+            ctx.fillStyle = this.Color;
+            ctx.fillRect(this.pos.x - this.w / 2, this.pos.y - this.h / 2, this.w, this.h);
         }
     }
 }
@@ -117,6 +117,8 @@ class OrangeEnemy extends Enemy
         super();
         this.Color = "orange";
         this.hp = 2;
+        this.w = 25;
+        this.h = 25;
     }
 }
 
