@@ -4,9 +4,7 @@ import {game_time} from './main.js'
 export default class Wave
 {
 	constructor( parent, jsonobj, atlas)
-	{
-		this.waveCounter = 0;
-		
+	{		
 		this.Parent = parent;
 		this.Atlas = atlas;
 		this.Name = jsonobj.name;
@@ -16,18 +14,12 @@ export default class Wave
 
 		this.delay = 100;
 		this.waveStartTime = -1;
-		
-		
-		for( var e = 0; e < jsonobj.enemies.length; e++ )
-		{
-			var quantity = jsonobj.enemies[e].qty;
-			var type = jsonobj.enemies[e].type;
-			
-			for( var i = 0; i < quantity; i++ )
-			{
-				this.Enemies.push( EnemyFactory.createEnemy( type, this.Parent.Path ));
-			}
-		}
+
+		//Create enemies in wave
+		jsonobj.enemies.forEach( e =>{
+			for( let i = 0; i < e.qty; i++ )
+				this.Enemies.push( EnemyFactory.createEnemy( e.type, this.Parent.Path));
+		});
 		
 		this.enemyIndex = 0;
 		this.waveSpawnComplete = false;
@@ -42,24 +34,19 @@ export default class Wave
 	 * @memberof Wave 
 	 * @returns {void}
 	 */
-	startWave()
+	startWave( waveNum )
 	{
 		this.waveStartTime = game_time;
 		this.isStarted = true;
-		console.log( 'Wave', this.waveCounter, 'started');
-		this.Enemies.forEach( (e, i) => {
-			e.StartTime = this.delay * i + this.waveStartTime;
-		});
+		console.log( 'Wave', waveNum, 'started');
+		this.Enemies.forEach( (e, i) => e.StartTime = this.delay * i + this.waveStartTime );
 	}
 
 	update()
 	{
 		if( !this.isStarted )
 			return;
-
-		
-
-
+			
 		this.Enemies.forEach( (e,i) => {
 			if( !e.isMoving )
 				if( e.StartTime < game_time ) 
@@ -70,14 +57,12 @@ export default class Wave
 			}
 		});
 		this.Enemies = this.Enemies.filter( el => !el.Despawn );
-		this.Enemies.forEach( (e,i) => this.Enemies[i].update());		
+		this.Enemies.forEach( e => e.update());		
 	}
 
 	draw( ctx )
 	{
-		if( this.isStarted )
-		{
+		if( this.isStarted)
 			this.Enemies.forEach( (e) => e.draw(ctx ));
-		}
 	}
 }
