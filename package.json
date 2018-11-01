@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/rbucinell/tower-defense#readme",
   "devDependencies": {
-    "babel": "^6.23.0",
     "del": "^3.0.0",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
