@@ -30,7 +30,7 @@ export class Enemy extends Entity
     {
         this._path = path.slice();
         var startingPoint = this._path.shift();
-        this.pos = startingPoint;
+        this.posVec = startingPoint;
         this.posVec.x = startingPoint.x;
         this.posVec.y = startingPoint.y;
     }
@@ -45,7 +45,7 @@ export class Enemy extends Entity
      */
     update()
     {
-        console.log( this.Id, this.posVec, this.curTarget)
+        //console.log( this.Id, this.posVec, this.curTarget)
         //don't move until flagged to go
         if( !this.isMoving )
             return;
@@ -66,9 +66,9 @@ export class Enemy extends Entity
         let dist = Vector2D.dist( nextPtVec, this.posVec );
         dirVec.multiply( dist <= this.spd ? dist : this.spd );
 
-        this.pos.x += Math.floor(dirVec.x);
-        this.pos.y += Math.floor(dirVec.y);
-        this.posVec = new Vector2D( this.pos.x, this.pos.y );
+        this.posVec.x += Math.floor(dirVec.x);
+        this.posVec.y += Math.floor(dirVec.y);
+        this.posVec = new Vector2D( this.posVec.x, this.posVec.y );
 
 
         const xdist = Math.abs( this.posVec.x - nextPoint.x );
@@ -87,25 +87,25 @@ export class Enemy extends Entity
         /*
         var atX = false, atY = false;
 
-        var xdist = Math.abs( this.pos.x - nextPoint.x );
+        var xdist = Math.abs( this.posVec.x - nextPoint.x );
         if( xdist > this.spd )
             xdist = this.spd
         if( xdist === 0)
             atX = true;
         else
-            this.pos.x = ( this.pos.x > nextPoint.x ) 
-                ? this.pos.x - xdist 
-                : this.pos.x + xdist;
+            this.posVec.x = ( this.posVec.x > nextPoint.x ) 
+                ? this.posVec.x - xdist 
+                : this.posVec.x + xdist;
 
-        var ydist = Math.abs( this.pos.y - nextPoint.y );
+        var ydist = Math.abs( this.posVec.y - nextPoint.y );
         if( ydist > this.spd )
             ydist = this.spd;
         if( ydist === 0 )
             atY = true;
         else
-            this.pos.y = ( this.pos.y > nextPoint.y )
-                ? this.pos.y - ydist
-                : this.pos.y + ydist;
+            this.posVec.y = ( this.posVec.y > nextPoint.y )
+                ? this.posVec.y - ydist
+                : this.posVec.y + ydist;
         if( atX && atY )
         {
             this.curTarget++;
@@ -128,7 +128,7 @@ export class Enemy extends Entity
         if( !this.Despawn)
         {
             ctx.fillStyle = this.Color
-            ctx.fillRect(this.pos.x - this.w / 2, this.pos.y - this.h / 2, this.w, this.h);
+            ctx.fillRect(this.posVec.x - this.w / 2, this.posVec.y - this.h / 2, this.w, this.h);
         }
     }
 }

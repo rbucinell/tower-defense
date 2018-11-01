@@ -4,10 +4,6 @@ export default class Entity
 {
     constructor() 
     {
-        this.pos = { 
-            x: 0, 
-            y: 0
-        };
         this.posVec = new Vector2D(0,0);
         this.w = 0; //width
         this.h = 0; //height
