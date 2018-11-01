@@ -32,7 +32,7 @@ export default class Track
             //this.Path.push( json.map.path.tiles[p] );
         }
 
-        for( var w of  json.waves )
+        for( var w of json.waves )
         {
             this._waves.push( new Wave( this, w, this.Map.Atlas ) );
         }
@@ -80,16 +80,13 @@ export default class Track
 
     nextWave() 
     {
-    
-        for( let i = 0; i < this.Waves.length; i++ )
-        {
-            const cur = this.Waves[i];
-            if( !cur.IsActive )
+        this.Waves.forEach( (w,i) => {
+            if( !w.IsActive )
             {
-                cur.startWave();
+                w.startWave(i);
                 break;
             }
-        }
+        });
     }
 
     update()
