@@ -86,6 +86,7 @@ TrackInterface.prototype.handleMouseUp = function( event )
 	if( this.startWaveButton.hitTest( mX, mY ) )
 	{
 		this.startWaveButton.handleMouseUp( event );
+		console.log( this.Track.CurrentWave, this.Track.Waves.length)
 		if( this.Track.CurrentWave <=  this.Track.Waves.length -1 )
 			this.Track.nextWave();
 	}
