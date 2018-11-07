@@ -11,26 +11,32 @@ export default class Atlas
 		this.fullyloaded = false;
 		
 		this.SpriteSheet = new Image();
-		fetch(spriteSheet).
-			then((response) => response.blob() ).
-			then((b) => {
-				this.SpriteSheet.src = URL.createObjectURL(b);
-			}).
-			then(() => {
-				fetch(dataFile).
-					then((response) => response.text()).
-					then( (text) => {
-						var oDOM = (new DOMParser()).parseFromString(text, "application/xml");
-						this.ReadXml(oDOM); // eslint-disable-line
+		this.loadSpritsheet(spriteSheet, dataFile, trackMapReference);
+		gAtlases.push( this );
+
+	}
+
+	loadSpritsheet( spriteSheet, dataFile, trackMapReference)
+	{
+		fetch(spriteSheet)
+			.then(response => response.blob())
+			.then(file => URL.createObjectURL(file))
+			.then(blob =>{
+				return new Promise((resolve, reject)=>{
+					this.SpriteSheet.onload = ()=> resolve();
+					this.SpriteSheet.onerror = reject;
+					this.SpriteSheet.src = blob;
+				});	
+			})
+			.then( 
+				fetch(dataFile)
+					.then(response => response.text())
+					.then(text => {
+						const parser = (new DOMParser()).parseFromString(text, "application/xml");
+						this.ReadXml(parser); // eslint-disable-line
 						if( typeof trackMapReference !== 'undefined' )
 							trackMapReference.LoadTiles();
-					});
-				
-				
-			})
-		
-			
-		gAtlases.push( this );
+					}));
 	}
 	
 	/**
@@ -42,20 +48,16 @@ export default class Atlas
 	 */
 	ReadXml( xmlDoc )
 	{	
-	
 		var elements = xmlDoc.getElementsByTagName( 'SubTexture' );
-		var textureCount = elements.length;
-		
-		for( var i = 0; i < textureCount; i++)
-		{
-			var texture = new Texture( elements[i].attributes['name'].value,
-				parseInt(elements[i].attributes['x'].value),
-				parseInt(elements[i].attributes['y'].value),
-				parseInt(elements[i].attributes['width'].value),
-				parseInt(elements[i].attributes['height'].value),
-				this);
-			this.Textures.push( texture );
-		}
+		Array.from(elements).forEach( e =>{
+			this.Textures.push( new Texture( 
+				e.attributes['name'].value,
+				parseInt(e.attributes['x'].value),
+				parseInt(e.attributes['y'].value),
+				parseInt(e.attributes['width'].value),
+				parseInt(e.attributes['height'].value),
+			this));
+		});
 		this.fullyloaded = true;
 	}
 
