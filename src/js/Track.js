@@ -1,5 +1,7 @@
 import TrackMap from './TrackMap.js'
 import Wave from './Wave.js'
+import { Tower } from './Tower.js';
+import Vector2D from './lib/Vector2D.js';
 
 export default class Track
 {
@@ -38,6 +40,11 @@ export default class Track
             this._waves.push( new Wave( this, w, this.Map.Atlas ) );
         }
         this._waveEnemies = this._waves[ this.CurrentWave ].Enemies;
+
+        //testing
+        let t = new Tower();
+        t.pos = new Vector2D( 5.5 * tileWidth, 3.5 * tileHeight);
+        this.Towers.push( t);
     }
 
     get Name()
