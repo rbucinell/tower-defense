@@ -40,7 +40,6 @@ class TDGame
 
     startup( trackFile)
     {
-
         fetch(trackFile).then((response) =>	{ 
             return response.json(); }).
         then((json) => {
