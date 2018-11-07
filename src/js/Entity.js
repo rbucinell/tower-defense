@@ -12,7 +12,24 @@ export default class Entity
         this.spd = 1;//speed
     }
 
+    center()
+    {
+        return { x: this.pos.x + this.w / 2,
+                 y: this.pos.y + this.h / 2};
+    }
+
     update(){}
 
-    draw(){}
+    draw( ctx ){
+        const c = this.center();
+        ctx.fillStyle = '#CCC';
+        ctx.beginPath();
+        ctx.arc(c.x,c.y,2,0,2*Math.PI);
+        ctx.fill();
+
+        ctx.strokeStyle = '#CCC';
+        ctx.beginPath();
+        ctx.rect(this.pos.x, this.pos.y,this.w,this.h);
+        ctx.stroke();
+    }
 }
