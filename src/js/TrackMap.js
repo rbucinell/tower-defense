@@ -84,12 +84,9 @@ export default class TrackMap
 		ctx.fillStyle = this.BaseColor;
 		ctx.fillRect(0, 0, this.width, this.height);
 		
-		if( this.Atlas.Textures.length === 0 )
-		{
-			console.log( "Textures for atlas have not loaded!");
-			return;
-		}
-		
+		//console.log( "Textures for atlas have not loaded!");
+		if( this.Atlas.Textures.length === 0 ) return; 
+
 		//Render the Terrain
 		const tileCount = this.TerrainTiles.length;
 
@@ -104,6 +101,7 @@ export default class TrackMap
 			//Debug tile border and tile name
 			if (typeof DEBUG_MODE !== 'undefined' && DEBUG_MODE === true) {
 				ctx.strokeStyle = "lightgray";
+				ctx.lineWidth = 1;
 				ctx.strokeRect(curTerrain.x, curTerrain.y, this.TileWidth, this.TileHeight);
 				
 				ctx.fillStyle = "black";
