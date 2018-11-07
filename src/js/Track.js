@@ -12,6 +12,7 @@ export default class Track
         this._waves = [];
         this._waveEnemies = [];
         this._curWave = 0;
+        this._towers = []
         
         var tileWidth = parseInt( json.map.tile_width );
         var tileHeight = parseInt( json.map.tile_height );
@@ -74,6 +75,15 @@ export default class Track
         this._curWave = val;
     }
 
+    get Towers()
+    {
+        return this._towers;
+    }
+
+    set Towers( val ){
+        this._towers = val;
+    }
+
     get Enemies() {
         return this._waveEnemies;
     }
@@ -93,6 +103,7 @@ export default class Track
 
     update()
     {
+        this.Towers.forEach( t => t.update() );
         if( this.CurrentWave >= this._waves.length )
         {
             //TODO check enemies and remainng life to determine win/loss
@@ -106,6 +117,7 @@ export default class Track
     draw( ctx )
     {
         this.Map.draw( ctx );
-        this.Waves.forEach( (w) => w.draw(ctx) );
+        this.Waves.forEach( w => w.draw(ctx) );
+        this.Towers.forEach( t => t.draw( ctx ));
     }
 }
