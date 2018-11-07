@@ -42,6 +42,7 @@ export class Enemy extends Entity
      */
     update()
     {
+        let center = this.center();
         //don't move until flagged to go
         if( !this.isMoving )
             return;
@@ -54,14 +55,14 @@ export class Enemy extends Entity
         }
 
         const next_vec = new Vector2D( this.Path[this.curTarget].x, this.Path[this.curTarget].y);
-        let next_dir = Vector2D.normal( Vector2D.sub(this.pos, next_vec));
-        const dist = Vector2D.dist( next_vec, this.pos);
+        let next_dir = Vector2D.normal( Vector2D.sub(center, next_vec));
+        const dist = Vector2D.dist( next_vec, center);
         next_dir.multiply( dist <= this.spd ? dist : this.spd );
 
         this.pos = Vector2D.add( this.pos, next_dir );
 
-        const xdist = Math.abs( this.pos.x - next_vec.x );
-        const ydist = Math.abs( this.pos.y - next_vec.y );
+        const xdist = Math.abs( center.x - next_vec.x );
+        const ydist = Math.abs( center.y - next_vec.y );
 
         if( xdist <= this.w/4 && ydist <= this.w/4)
         {
@@ -85,7 +86,8 @@ export class Enemy extends Entity
         if( !this.Despawn)
         {
             ctx.fillStyle = this.Color;
-            ctx.fillRect(this.pos.x - this.w / 2, this.pos.y - this.h / 2, this.w, this.h);
+            ctx.fillRect(this.pos.x, this.pos.y, this.w, this.h);
+            super.draw( ctx );
         }
     }
 }
