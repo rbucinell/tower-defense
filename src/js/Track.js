@@ -80,13 +80,15 @@ export default class Track
 
     nextWave() 
     {
-        this.Waves.forEach( (w,i) => {
-            if( !w.IsActive )
+        for( let i = 0; i < this.Waves.length; i++ )
+        {
+            let w = this.Waves[i];
+            if( !w.IsActive)
             {
                 w.startWave(i);
                 break;
             }
-        });
+        }
     }
 
     update()
