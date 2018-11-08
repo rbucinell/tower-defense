@@ -11,7 +11,7 @@ export class Tower extends Entity
     constructor() {
         super();
         this.range = 100;
-        this.direction = new Vector2D(0,1);
+        this.dir = new Vector2D(0,1);
         this.w = 20;
         this.h = 20;
         this.track = null;
@@ -22,24 +22,22 @@ export class Tower extends Entity
         this.track = track;
     }
 
-    update() {
+    update() 
+    {
         let enemiesInRange = [];
-        this.track.Waves.forEach(w => {
-            if( w.isStarted )
-            {
-                enemiesInRange = enemiesInRange.concat(w.Enemies.filter( e => Vector2D.dist( this.pos, e.pos) < this.range && e.isMoving && !e.Despawn ));
-            }
+        this.track.Waves.filter( w => w.isStarted ).forEach( w => {
+            enemiesInRange = enemiesInRange.concat(w.Enemies.filter( e => Vector2D.dist( this.pos, e.pos) < this.range && e.isMoving && !e.Despawn ));
         });
 
         if( enemiesInRange.length > 0 )
         {
             let first = enemiesInRange.slice()[0];
-            this.direction = Vector2D.normal(Vector2D.sub( this.center(), first.pos ));
+            this.dir = Vector2D.normal(Vector2D.sub( this.center(), first.center() ));
         }
     }
 
-    draw( ctx ) {
-        
+    draw( ctx ) 
+    {        
         //draw tower base
         const c = this.center();
         ctx.fillStyle = 'blue';
@@ -53,7 +51,7 @@ export class Tower extends Entity
         ctx.lineWidth = 2;
         ctx.beginPath();
             ctx.moveTo(c.x,c.y);        
-            ctx.lineTo(c.x + (this.direction.x*len), c.y + (this.direction.y*len));
+            ctx.lineTo(c.x + (this.dir.x*len), c.y + (this.dir.y*len));
         ctx.stroke();
 
         //draw range
@@ -61,7 +59,5 @@ export class Tower extends Entity
         ctx.beginPath();
             ctx.arc( c.x, c.y, this.range, 0, 2*Math.PI);
         ctx.stroke();
-
-        
     }
 }
