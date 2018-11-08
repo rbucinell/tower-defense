@@ -14,8 +14,7 @@ export default class Entity
 
     center()
     {
-        return { x: this.pos.x + this.w / 2,
-                 y: this.pos.y + this.h / 2};
+        return new Vector2D( this.pos.x + this.w / 2, this.pos.y + this.h / 2 );
     }
 
     update(){}
