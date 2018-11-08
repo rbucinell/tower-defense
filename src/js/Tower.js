@@ -14,13 +14,31 @@ export class Tower extends Entity
         this.direction = new Vector2D(0,1);
         this.w = 20;
         this.h = 20;
+        this.track = null;
+    }
+
+    addToTrack( track )
+    {
+        this.track = track;
     }
 
     update() {
+        let enemiesInRange = [];
+        this.track.Waves.forEach(w => {
+            if( w.isStarted )
+            {
+                enemiesInRange = enemiesInRange.concat(w.Enemies.filter( e => Vector2D.dist( this.pos, e.pos) < this.range && e.isMoving && !e.Despawn ));
+            }
+        });
 
+        if( enemiesInRange.length > 0 )
+        {
+            let first = enemiesInRange.slice()[0];
+            this.direction = Vector2D.normal(Vector2D.sub( this.center(), first.pos ));
+        }
     }
 
-    draw( ctx ){
+    draw( ctx ) {
         
         //draw tower base
         const c = this.center();
@@ -38,11 +56,10 @@ export class Tower extends Entity
             ctx.lineTo(c.x + (this.direction.x*len), c.y + (this.direction.y*len));
         ctx.stroke();
 
-        
         //draw range
         ctx.strokeStyle='rgba(0,0,255,0.2)'
         ctx.beginPath();
-        ctx.arc( c.x, c.y, this.range, 0, 2*Math.PI);
+            ctx.arc( c.x, c.y, this.range, 0, 2*Math.PI);
         ctx.stroke();
 
         
