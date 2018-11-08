@@ -44,7 +44,13 @@ export default class Track
         //testing
         let t = new Tower();
         t.pos = new Vector2D( 5.5 * tileWidth, 3.5 * tileHeight);
-        this.Towers.push( t);
+        this.placeTower( t );
+    }
+
+    placeTower( tower )
+    {
+        tower.addToTrack( this );
+        this.Towers.push( tower );
     }
 
     get Name()
