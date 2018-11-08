@@ -51,7 +51,7 @@ export class Tower extends Entity
     fireBulletAt( enemy )
     {
         let b = new Bullet();
-        b.pos = Vector2D.add( this.center, this.dir );
+        b.pos = Vector2D.add( this.center(), this.dir );
         b.dir = this.dir; //this should be the same as this pos - target.pos
         this.bullets.push( b );
         this.lastfiretime = game_time;
