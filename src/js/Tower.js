@@ -1,5 +1,7 @@
 import Entity from './Entity.js';
 import Vector2D from './lib/Vector2D.js';
+import Bullet from './Bullet.js';
+import { game_time } from './main.js';
 
 /**
  * Tower class
@@ -15,6 +17,9 @@ export class Tower extends Entity
         this.w = 20;
         this.h = 20;
         this.track = null;
+        this.bullets = [];
+        this.lastfiretime = null;
+        this.fire_rate = 100;
     }
 
     addToTrack( track )
@@ -33,7 +38,23 @@ export class Tower extends Entity
         {
             let first = enemiesInRange.slice()[0];
             this.dir = Vector2D.normal(Vector2D.sub( this.center(), first.center() ));
+
+            console.log( game_time, this.lastfiretime, this.fire_rate);
+            if( this.lastfiretime === null ||  game_time - this.lastfiretime > this.fire_rate )
+                this.fireBulletAt( first );
+
         }
+
+        this.bullets.forEach( b => b.update());
+    }
+
+    fireBulletAt( enemy )
+    {
+        let b = new Bullet();
+        b.pos = Vector2D.add( this.center, this.dir );
+        b.dir = this.dir; //this should be the same as this pos - target.pos
+        this.bullets.push( b );
+        this.lastfiretime = game_time;
     }
 
     draw( ctx ) 
@@ -55,9 +76,11 @@ export class Tower extends Entity
         ctx.stroke();
 
         //draw range
-        ctx.strokeStyle='rgba(0,0,255,0.2)'
+        ctx.strokeStyle='rgba(0,0,255,0.2)';
         ctx.beginPath();
             ctx.arc( c.x, c.y, this.range, 0, 2*Math.PI);
         ctx.stroke();
+
+        this.bullets.forEach( b => b.draw( ctx ));
     }
 }
