@@ -28,15 +28,15 @@ export default class Atlas
 					this.SpriteSheet.src = blob;
 				});	
 			})
-			.then( 
-				fetch(dataFile)
+			.then(fetch(dataFile)
 					.then(response => response.text())
 					.then(text => {
 						const parser = (new DOMParser()).parseFromString(text, "application/xml");
 						this.ReadXml(parser); // eslint-disable-line
 						if( typeof trackMapReference !== 'undefined' )
 							trackMapReference.LoadTiles();
-					}));
+					})
+			);
 	}
 	
 	/**
