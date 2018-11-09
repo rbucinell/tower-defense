@@ -3,14 +3,18 @@ import Vector2D from './lib/Vector2D.js';
 import Bullet from './Bullet.js';
 import { game_time } from './main.js';
 
+
 /**
- * Tower class
- * 
+ * Standard class for a tower
+ *
+ * @export
  * @class Tower
+ * @extends {Entity}
  */
 export class Tower extends Entity
 {
-    constructor() {
+    constructor() 
+    {
         super();
         this.range = 100;
         this.dir = new Vector2D(0,1);
@@ -23,6 +27,12 @@ export class Tower extends Entity
         this.bullet_speed = 10;
     }
 
+    /**
+     *
+     *
+     * @param {Track} track
+     * @memberof Tower
+     */
     addToTrack( track )
     {
         this.track = track;
@@ -47,6 +57,13 @@ export class Tower extends Entity
         this.bullets.forEach( b => b.update());
     }
 
+
+    /**
+     * Creates a bullet to fire at a given target
+     *
+     * @param {Enemy} enemy The target to fire at
+     * @memberof Tower
+     */
     fireBulletAt( enemy )
     {
         let b = new Bullet();
