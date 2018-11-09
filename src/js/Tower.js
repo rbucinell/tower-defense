@@ -20,6 +20,7 @@ export class Tower extends Entity
         this.bullets = [];
         this.lastfiretime = null;
         this.fire_rate = 100;
+        this.bullet_speed = 10;
     }
 
     addToTrack( track )
@@ -38,8 +39,6 @@ export class Tower extends Entity
         {
             let first = enemiesInRange.slice()[0];
             this.dir = Vector2D.normal(Vector2D.sub( this.center(), first.center() ));
-
-            console.log( game_time, this.lastfiretime, this.fire_rate);
             if( this.lastfiretime === null ||  game_time - this.lastfiretime > this.fire_rate )
                 this.fireBulletAt( first );
 
@@ -51,8 +50,7 @@ export class Tower extends Entity
     fireBulletAt( enemy )
     {
         let b = new Bullet();
-        b.pos = Vector2D.add( this.center(), this.dir );
-        b.dir = this.dir; //this should be the same as this pos - target.pos
+        b.spawn( this.center(), this.dir, this.bullet_speed);
         this.bullets.push( b );
         this.lastfiretime = game_time;
     }
