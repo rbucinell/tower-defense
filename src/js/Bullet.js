@@ -1,4 +1,5 @@
 import Vector2D from './lib/Vector2D.js';
+import { cnvs } from './main.js';
 
 export default class Bullet 
 {
@@ -7,6 +8,7 @@ export default class Bullet
         this.pos = new Vector2D(0,0);
         this.dir = new Vector2D(0,0);
         this.spd = 5;
+        this.disposed = false;
     }
 
     /**
@@ -27,6 +29,8 @@ export default class Bullet
     update()
     {
         this.pos = Vector2D.add( this.pos, this.dir );
+        if( this.pos.x < 0 || this.pos.x > cnvs.width || this.pos.y < 0 || this.pos.y > cnvs.height )
+            this.disposed = true;
     }
 
     draw( ctx ){
