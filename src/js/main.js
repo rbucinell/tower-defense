@@ -3,12 +3,14 @@ import TrackInterface from './TrackInterface.js';
 
 export var DEBUG_MODE = true;
 export var game_time = 0;
+export var cnvs;
 
 class TDGame
 {
     constructor( canvas )
     {
         this.canvas = canvas;
+        cnvs = this.canvas;
         this.ctx = this.canvas.getContext("2d");
         this._framerate = 60;
         this._intervalID = -1;
