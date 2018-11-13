@@ -51,9 +51,9 @@ export class Tower extends Entity
             this.dir = Vector2D.normal(Vector2D.sub( this.center(), first.center() ));
             if( this.lastfiretime === null ||  game_time - this.lastfiretime > this.fire_rate )
                 this.fireBulletAt( first );
-
         }
 
+        this.bullets= this.bullets.filter( b => ! b.disposed);
         this.bullets.forEach( b => b.update());
     }
 
