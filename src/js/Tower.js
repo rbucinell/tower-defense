@@ -23,7 +23,7 @@ export class Tower extends Entity
         this.track = null;
         this.bullets = [];
         this.lastfiretime = null;
-        this.fire_rate = 100;
+        this.fire_rate = 20;
         this.bullet_speed = 10;
     }
 

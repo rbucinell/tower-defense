@@ -125,6 +125,22 @@ export default class Track
         {
             this.Waves.forEach( (w) =>  w.update() );
         }
+        this.Towers.forEach( t => t.bullets.forEach( b => {
+            for( let w = 0; w < this.Waves.length; w++ )
+            {
+                for( let e = 0; e < this.Waves[w].Enemies.length; e++ )
+                {
+                    if( !b.disposed )
+                    {
+                        b.collideWith( this.Waves[w].Enemies[e] );
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+        }));
     }
 
     draw( ctx )

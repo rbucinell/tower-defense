@@ -34,6 +34,17 @@ export class Enemy extends Entity
 
     get Path() { return this._path; }
 
+
+
+    takeDamage( amt )
+    {
+        this.hp -= amt;
+        if( this.hp <= 0 )
+        {
+            this.spd = 0;
+            this.Despawn = true;
+        }
+    }
     /**
      * Update logic for the Enemy object
      * 
@@ -118,7 +129,7 @@ class OrangeEnemy extends Enemy
     {
         super();
         this.Color = "orange";
-        this.hp = 2;
+        this.hp = 4;
         this.w = 25;
         this.h = 25;
     }
@@ -130,7 +141,7 @@ class GreenEnemy extends Enemy
     {
         super();
         this.Color = "green";
-        this.hp = 5;
+        this.hp = 10;
         this.spd = 5;
     }
 }

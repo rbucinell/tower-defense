@@ -8,7 +8,7 @@ export default class Entity
         this.w = 0; //width
         this.h = 0; //height
         this.range = 0; //range
-        this.hp = 10; //health
+        this.hp = 1; //health
         this.spd = 1;//speed
     }
 

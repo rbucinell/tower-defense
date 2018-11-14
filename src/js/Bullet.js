@@ -9,6 +9,8 @@ export default class Bullet
         this.dir = new Vector2D(0,0);
         this.spd = 5;
         this.disposed = false;
+        this.damage = 2;
+        this.diameter = 2;
     }
 
     /**
@@ -26,6 +28,15 @@ export default class Bullet
         this.dir = Vector2D.multiply( Vector2D.normal(direction), new Vector2D( this.spd, this.spd ));
     }
 
+    collideWith( enemy )
+    {
+        if( Vector2D.sub(this.pos, enemy.pos).mag() < enemy.w / 2 )
+        {
+            enemy.takeDamage( this.damage );
+            this.disposed = true;
+        }
+    }
+
     update()
     {
         this.pos = Vector2D.add( this.pos, this.dir );
@@ -36,7 +47,7 @@ export default class Bullet
     draw( ctx ){
         ctx.fillStyle = '#FFF';
         ctx.beginPath();
-        ctx.arc(this.pos.x,this.pos.y,2,0,2*Math.PI);
+        ctx.arc(this.pos.x,this.pos.y,this.diameter,0,this.diameter*Math.PI);
         ctx.fill();
     }
 }
