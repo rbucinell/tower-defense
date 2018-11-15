@@ -38,7 +38,7 @@ export default class Vector2D
 		this.y = newVec.y;
 	}
 
-	multiply( scalar )
+	multiplyScalar( scalar )
 	{
 		this.x *= scalar;
 		this.y *= scalar;
