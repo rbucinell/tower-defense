@@ -34,17 +34,19 @@ export class Enemy extends Entity
 
     get Path() { return this._path; }
 
-
-
+    /**
+     * Instructs the enemy to take a certain amount of damage, triggering despawn if hp < 0
+     *
+     * @param {Number} amt
+     * @memberof Enemy
+     */
     takeDamage( amt )
     {
         this.hp -= amt;
-        if( this.hp <= 0 )
-        {
-            this.spd = 0;
+        if( this.hp <= 0)
             this.Despawn = true;
-        }
     }
+
     /**
      * Update logic for the Enemy object
      * 
@@ -64,13 +66,16 @@ export class Enemy extends Entity
             this.Despawn = true;
             return;
         }
-
+        
+        //update the direction vector
         const next_vec = new Vector2D( this.Path[this.curTarget].x, this.Path[this.curTarget].y);
-        let next_dir = Vector2D.normal( Vector2D.sub(center, next_vec));
-        const dist = Vector2D.dist( next_vec, center);
-        next_dir.multiply( dist <= this.spd ? dist : this.spd );
+        this.dir = Vector2D.normal( Vector2D.sub(this.center(), next_vec));
 
-        this.pos = Vector2D.add( this.pos, next_dir );
+        //determine velocity
+        const dist = Vector2D.dist( next_vec, this.center());
+        let velocity = this.dir;
+        velocity.multiplyScalar( dist <= this.spd ? dist : this.spd );
+        this.pos = Vector2D.add( this.pos, velocity );
 
         const xdist = Math.abs( center.x - next_vec.x );
         const ydist = Math.abs( center.y - next_vec.y );
