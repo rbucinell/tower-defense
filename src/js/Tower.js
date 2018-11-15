@@ -3,7 +3,6 @@ import Vector2D from './lib/Vector2D.js';
 import Bullet from './Bullet.js';
 import { game_time } from './main.js';
 
-
 /**
  * Standard class for a tower
  *
@@ -47,16 +46,25 @@ export class Tower extends Entity
 
         if( enemiesInRange.length > 0 )
         {
-            let first = enemiesInRange.slice()[0];
-            this.dir = Vector2D.normal(Vector2D.sub( this.center(), first.center() ));
-            if( this.lastfiretime === null ||  game_time - this.lastfiretime > this.fire_rate )
-                this.fireBulletAt( first );
-        }
+            let first = enemiesInRange[0];
 
+            let enemyVel = first.dir;
+            enemyVel.multiplyScalar( first.spd );
+
+            //fire at first bullet
+            let predictivePos = Vector2D.sub( enemyVel, first.center());
+            this.dir = Vector2D.normal(Vector2D.sub( this.center(),predictivePos));
+            
+            //fire at enemy
+            if( this.lastfiretime === null ||  game_time - this.lastfiretime > this.fire_rate )
+            {
+                this.fireBullet();
+            }
+        }
+        
         this.bullets= this.bullets.filter( b => ! b.disposed);
         this.bullets.forEach( b => b.update());
     }
-
 
     /**
      * Creates a bullet to fire at a given target
@@ -64,7 +72,7 @@ export class Tower extends Entity
      * @param {Enemy} enemy The target to fire at
      * @memberof Tower
      */
-    fireBulletAt( enemy )
+    fireBullet()
     {
         let b = new Bullet();
         b.spawn( this.center(), this.dir, this.bullet_speed);
