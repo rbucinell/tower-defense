@@ -1,13 +1,12 @@
 import Vector2D from './lib/Vector2D.js';
 import { cnvs } from './main.js';
+import Entity from './Entity.js';
 
-export default class Bullet 
+export default class Bullet extends Entity
 {
     constructor() 
     {
-        this.pos = new Vector2D(0,0);
-        this.dir = new Vector2D(0,0);
-        this.spd = 5;
+        super();
         this.disposed = false;
         this.damage = 2;
         this.diameter = 2;
