@@ -18,6 +18,16 @@ export default class Entity
         return new Vector2D( this.pos.x + this.w / 2, this.pos.y + this.h / 2 );
     }
 
+    get Vx()
+    {
+        return Vector2D.multiplyScalar( this.dir.normal(), this.spd ).x;
+    }
+
+    get Vy()
+    {
+        return Vector2D.multiplyScalar( this.dir.normal(), this.spd ).y;
+    }
+
     update(){}
 
     draw( ctx ){
