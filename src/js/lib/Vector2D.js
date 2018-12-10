@@ -59,6 +59,11 @@ export default class Vector2D
 		return new Vector2D( Math.roundToTwo(v2.x * v1.x), Math.roundToTwo(v2.y * v1.y) );
 	}
 
+	static multiplyScalar( v, s )
+	{
+		return new Vector2D( v.x * s, v.y * s );
+	}
+
 	static normal(vec)
 	{
 		const m = vec.mag();
