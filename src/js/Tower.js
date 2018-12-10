@@ -46,24 +46,39 @@ export class Tower extends Entity
 
         if( enemiesInRange.length > 0 )
         {
+            //track the enemy best you can until you're ready to fire
             let first = enemiesInRange[0];
-
-            let enemyVel = first.dir;
-            enemyVel.multiplyScalar( first.spd );
-
-            //fire at first bullet
-            let predictivePos = Vector2D.sub( enemyVel, first.center());
-            this.dir = Vector2D.normal(Vector2D.sub( this.center(),predictivePos));
+            this.dir = Vector2D.normal(Vector2D.sub( this.center(),first.center()));
             
             //fire at enemy
             if( this.lastfiretime === null ||  game_time - this.lastfiretime > this.fire_rate )
             {
+                this.dir = this.aimAt( first );
                 this.fireBullet();
             }
         }
         
         this.bullets= this.bullets.filter( b => ! b.disposed);
         this.bullets.forEach( b => b.update());
+    }
+
+    /**
+     * Aims at the e with prediction
+     *
+     * @param {*} e The enemy to aim at
+     * @memberof Tower
+     */
+    aimAt( e )
+    {
+        //create an entity for ease
+        let b = new Bullet();
+        b.spawn( this.center(), this.dir, this.bullet_speed);
+
+        let predict = new Vector2D(
+            (b.Vx * e.pos.x - e.Vx * this.pos.x) / ( b.Vx - e.Vx ),
+            (b.Vy * e.pos.y - e.Vy * this.pos.y) / ( b.Vy - e.Vy )
+        );
+        return Vector2D.sub( this.center(), predict );
     }
 
     /**
