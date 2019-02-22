@@ -1,7 +1,8 @@
 import TrackMap from './TrackMap.js'
 import Wave from './Wave.js'
-import { Tower } from './Tower.js';
 import Vector2D from './lib/Vector2D.js';
+import { Tower } from './Tower.js';
+import {GameEvents} from './Events.js';
 
 export default class Track
 {
@@ -42,7 +43,7 @@ export default class Track
         }
         this._waveEnemies = this._waves[ this.CurrentWave ].Enemies;
 
-        document.addEventListener( 'enemeyKilled', (e) => this.Money += e.detail.enemy.bounty );
+        document.addEventListener( GameEvents.ENEMY_KILLED, (e) => this.Money += e.detail.enemy.bounty );
 
         //testing
         let t = new Tower();

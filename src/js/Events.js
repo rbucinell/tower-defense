@@ -1,3 +1,9 @@
+
+export const GameEvents =
+{
+    ENEMY_KILLED: "enemeyKilled"
+}
+
 /**
  * Custom event to announce when an Enemy dies
  *
@@ -5,7 +11,7 @@
  */
 export const enemyKilledEvent = function(e)
 {
-    const event = new CustomEvent( 'enemeyKilled', {
+    const event = new CustomEvent( GameEvents.ENEMY_KILLED, {
         detail :{
             enemy: e
         }
