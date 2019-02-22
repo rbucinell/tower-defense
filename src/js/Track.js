@@ -15,7 +15,7 @@ export default class Track
         this._waveEnemies = [];
         this._curWave = 0;
         this._towers = []
-        this._money = 0;
+        this._money = 20;
         
         var tileWidth = parseInt( json.map.tile_width );
         var tileHeight = parseInt( json.map.tile_height );
