@@ -42,13 +42,13 @@ class TDGame
 
     startup( trackFile)
     {
-        fetch(trackFile).then((response) =>	{ 
-            return response.json(); }).
-        then((json) => {
-			this.loadTrack( json );
-            this.IsRunning = true;
-            this._intervalID = setInterval( this.loop, 1000 / this._framerate );
-		});
+        fetch(trackFile)
+            .then((response) =>	response.json())
+            .then((json) => {
+                this.loadTrack( json );
+                this.IsRunning = true;
+                this._intervalID = setInterval( this.loop, 1000 / this._framerate );
+		    });
     }
 
     start()
@@ -93,13 +93,17 @@ class TDGame
 }
 
 
-function ready(fn) {
-    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading"){
-      fn();
-    } else {
-      document.addEventListener('DOMContentLoaded', fn);
+function ready(fn) 
+{
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading")
+    {
+        fn();
+    } 
+    else
+    {
+        document.addEventListener('DOMContentLoaded', fn);
     }
-  }
+}
 
 ready(()=>{
     const game = new TDGame( document.getElementById('canvas'));
