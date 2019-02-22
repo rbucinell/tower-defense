@@ -63,7 +63,6 @@ export default class TrackInterface
 				break;
 		}
 
-
 		var waveNum = lastIndexActive;
 		if( waveNum < this.Track.Waves.length )
 		{
@@ -73,8 +72,11 @@ export default class TrackInterface
 		{
 			ctx.fillText( "[FINAL WAVE]", startX, 60);
 		}
-		
+
 		this.startWaveButton.draw( ctx );
+
+		ctx.fillText( `Cash: $${ this.Track.Money }`, startX, 150 );
+
 	}
 }
 

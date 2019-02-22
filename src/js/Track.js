@@ -15,6 +15,7 @@ export default class Track
         this._waveEnemies = [];
         this._curWave = 0;
         this._towers = []
+        this._money = 0;
         
         var tileWidth = parseInt( json.map.tile_width );
         var tileHeight = parseInt( json.map.tile_height );
@@ -40,6 +41,8 @@ export default class Track
             this._waves.push( new Wave( this, w, this.Map.Atlas ) );
         }
         this._waveEnemies = this._waves[ this.CurrentWave ].Enemies;
+
+        document.addEventListener( 'enemeyKilled', (e) => this.Money += e.detail.enemy.bounty );
 
         //testing
         let t = new Tower();
@@ -100,6 +103,19 @@ export default class Track
     get Enemies() {
         return this._waveEnemies;
     }
+
+    get Money()
+    {
+        return this._money;
+    }
+
+    set Money( val )
+    {
+        if( val < 0) val = 0;
+        this._money = val;
+    }
+
+
 
     nextWave() 
     {

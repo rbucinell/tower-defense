@@ -1,5 +1,6 @@
 import Entity from './Entity.js';
 import Vector2D from './lib/Vector2D.js';
+import {enemyKilledEvent} from './Events.js';
 
 var id_index = 0; //static index incrementor for Enemy ID debugging
 
@@ -24,6 +25,8 @@ export class Enemy extends Entity
         this.isMoving = false;
         this.AtGoal = false;
         this.Despawn = false;
+
+        this.bounty = 1;
     }
 
     set Path ( path )
@@ -44,7 +47,10 @@ export class Enemy extends Entity
     {
         this.hp -= amt;
         if( this.hp <= 0)
+        {
+            enemyKilledEvent(this);
             this.Despawn = true;
+        }
     }
 
     /**
@@ -137,6 +143,7 @@ class OrangeEnemy extends Enemy
         this.hp = 4;
         this.w = 25;
         this.h = 25;
+        this.bounty = 5;
     }
 }
 
@@ -148,6 +155,7 @@ class GreenEnemy extends Enemy
         this.Color = "green";
         this.hp = 10;
         this.spd = 5;
+        this.bounty = 10;
     }
 }
 
