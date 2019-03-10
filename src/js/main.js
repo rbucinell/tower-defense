@@ -27,6 +27,11 @@ class TDGame
         });
     }
 
+    /**
+     * Returns true if the game is an an active state
+     * 
+     * @returns {bool}
+     */
     get IsRunning(){
         return this._isRunning;
     }
