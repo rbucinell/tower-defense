@@ -5,6 +5,9 @@ export var DEBUG_MODE = true;
 export var game_time = 0;
 export var cnvs;
 
+/**
+ * @author Ryan Bucinell
+ */
 class TDGame
 {
     constructor( canvas )
