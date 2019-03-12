@@ -21,6 +21,11 @@ class TDGame
         this.currentTrack = null;
         this.trackInterface = null; 
 
+        this.canvas.addEventListener('mousemove', event =>{
+            if( this.trackInterface)
+                this.trackInterface.handleMouseHover( event );
+        });
+
         this.canvas.addEventListener('mouseup', (event) => {
             if( this.trackInterface)
                 this.trackInterface.handleMouseUp(event);
