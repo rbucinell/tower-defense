@@ -4,11 +4,11 @@ var DEBUG_MODE = true;
 
 export default class TrackMap
 {
+
 	constructor( json )
 	{
 		this.json = json;
 		this.Atlas = new Atlas( json.atlas_map, json.atlas_data, this);
-
 		this.TileWidth = parseInt( json.tile_width );
 		this.TileHeight = parseInt(json.tile_height);
 		
@@ -111,6 +111,7 @@ export default class TrackMap
 			}
 		}
 		
+		/*
 		//Render the path
 		const settings = {
 			lineWidth: ctx.lineWidth,
@@ -139,15 +140,16 @@ export default class TrackMap
 		ctx.lineWidth = settings.lineWidth;
 		ctx.setLineDash( settings.lineDash );
 		ctx.strokeStyle = settings.strokeStyle;
+		*/
 		
-		/* //Draw using the Map tiles
+		 //Draw using the Map tiles
 		const pathCount = this.PathTiles.length;
 		for( let i = 0; i < pathCount; i++ )
 		{
 			const curPath = this.PathTiles[i];
 			texture = this.Atlas.getTextureByName( curPath.texture_name );
 			ctx.drawImage(this.Atlas.SpriteSheet, texture.x, texture.y, texture.w, texture.h,  curPath.x, curPath.y, this.TileWidth, this.TileHeight);
-		}*/
+		}
 		
 		//Render the objects
 		const objCount = this.ObjectTiles.length;
