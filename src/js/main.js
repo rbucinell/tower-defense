@@ -5,6 +5,9 @@ export var DEBUG_MODE = true;
 export var game_time = 0;
 export var cnvs;
 
+/**
+ * @author Ryan Bucinell
+ */
 class TDGame
 {
     constructor( canvas )
@@ -24,6 +27,11 @@ class TDGame
         });
     }
 
+    /**
+     * Returns true if the game is an an active state
+     * 
+     * @returns {bool}
+     */
     get IsRunning(){
         return this._isRunning;
     }
