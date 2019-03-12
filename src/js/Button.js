@@ -1,3 +1,5 @@
+import Atlas from './Atlas.js'
+
 const ButtonState = 
 {
 	DEFAULT: "default",
@@ -7,14 +9,16 @@ const ButtonState =
 
 export default class Button
 {
-	constructor( x, y, w, h, fill, text )
+	constructor( x, y, w, h, atlas, texture_name, text, font )
 	{
 		this.x = x;
 		this.y = y;
 		this.w = w;
 		this.h = h;
-		this.fill = fill;
+		this.Atlas = atlas;
+		this.texture_name = texture_name;
 		this.text = text;
+		this.font = font;
 	}
 
 	hitTest(x,y)
@@ -29,27 +33,21 @@ export default class Button
 
 	draw( ctx )
 	{
-		ctx.beginPath();
-		ctx.strokeStyle = "#000";
-		ctx.fillStyle = this.fill;
-		
-		ctx.rect(this.x,this.y,this.w,this.h);
-		ctx.fill();
-		ctx.stroke();
-		
-		ctx.fillStyle = "#000000";
-		ctx.fillText(this.text, this.x+(this.w/4), this.y+(this.h* 3/4 ) );
+		this.texture = this.Atlas.getTextureByName( this.State === ButtonState.HOVER ? "blue_button01.png" : "blue_button00.png");
+		if(this.texture)
+		{
+			//Draw Next Wave Button
+			ctx.drawImage(this.Atlas.SpriteSheet, this.texture.x, this.texture.y, this.texture.w, this.texture.h, this.x, this.y, this.w, this.h);
+			ctx.font = this.font;
+			ctx.fillStyle = "#000000";
+			ctx.fillText(this.text, 
+				this.x + this.w/2 - ctx.measureText(this.text).width/2, 
+				this.y + this.h/2 + ctx.measureText('M').width/2 );
+		}
 	}
 
-	handleMouseUp( event )
+	handleMouseHover( event, mX, mY )
 	{
-		if( this.hitTest(event.x, event.y) )
-		{
-			this.State = ButtonState.HOVER;
-		}
-		else
-		{
-			this.State = ButtonState.DEFAULT;
-		}
-	}	
+		this.State = this.hitTest( mX, mY ) ? ButtonState.HOVER : ButtonState.DEFAULT;
+	}
 }
