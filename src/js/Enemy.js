@@ -45,12 +45,14 @@ export class Enemy extends Entity
      */
     takeDamage( amt )
     {
+        let noise = new Audio("audio/sfx/sfx_damage_hit1.wav");
         this.hp -= amt;
         if( this.hp <= 0)
         {
             enemyKilledEvent(this);
             this.Despawn = true;
         }
+        noise.play();
     }
 
     /**
