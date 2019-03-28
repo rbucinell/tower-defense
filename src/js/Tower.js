@@ -24,6 +24,9 @@ export class Tower extends Entity
         this.lastfiretime = null;
         this.fire_rate = 20;
         this.bullet_speed = 10;
+        this.sfx = {
+            "fire": new Audio("audio/sfx/sfx_wpn_machinegun_loop1.wav")
+        };
     }
 
     /**
@@ -73,6 +76,7 @@ export class Tower extends Entity
         //create an entity for ease
         let b = new Bullet();
         b.spawn( this.center(), this.dir, this.bullet_speed);
+        this.sfx.fire.play();
 
         let predict = new Vector2D(
             (b.Vx * e.pos.x - e.Vx * this.pos.x) / ( b.Vx - e.Vx ),
