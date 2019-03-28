@@ -148,14 +148,7 @@
             "enemies": [
                 { "type": "red", "qty": "1" }
             ]
-        },        
-        {
-            "name": "Wave 0.5",
-            "hint": "Just a test, 1 loley soldier",
-            "enemies": [
-                { "type": "red", "qty": "2" }
-            ]
-        }, 
+        },     
         {
             "name": "Wave 1",
             "hint": "Stop all enemies from reaching your base!",
