@@ -68,7 +68,7 @@ export default class TrackInterface
 				break;
 		}
 		let waveNum = lastIndexActive;
-		let waveinfo = (waveNum < this.Track.Waves.length) ? `Next Wave: ${this.Track.Waves[ waveNum ].Hint}` : "[FINAL WAVE]";
+		let waveinfo = (waveNum < this.Track.Waves.length) ? `Wave Hint: ${this.Track.Waves[ waveNum ].Hint}` : "[FINAL WAVE]";
 		ctx.fillText( waveinfo, this.LeftEdge+ 15, 40, 250 );	
 
 		//Draw Next wave
