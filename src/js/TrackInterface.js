@@ -1,5 +1,6 @@
 import Button from './Button.js'
 import Atlas from './Atlas.js'
+import {TILE_SIZE} from './main.js'
 
 export const {INTERFACE_FONT} = "Kenney Future Narrow";
 
@@ -9,20 +10,26 @@ export default class TrackInterface
 	{
 		this.canvas = canvas;
 		this._track = null;
-		this.UIAtlas = new Atlas( "img/blue_ui_spritesheet.png", "data/blue_ui_spritesheet.xml");
-		this.TDAtlas = new Atlas( "img/towerDefense_tilesheet.png", "data/tower_defense_spritesheet.xml");
+		this.Atlases = {
+			"TD" : new Atlas( "img/towerDefense_tilesheet.png", "data/tower_defense_spritesheet.xml"),
+			"UI" :
+			{
+				"Blue" : new Atlas( "img/blue_ui_spritesheet.png", "data/blue_ui_spritesheet.xml"),
+				"Grey" : new Atlas( "img/grey_ui_spritesheet.png", "data/grey_ui_spritesheet.xml"),
+			}
+		}
 		this.font = new FontFace(INTERFACE_FONT, 'url(font/kenny_future_narrow.ttf)' );
 		this.font.load().then(function(loaded_face){
 			document.fonts.add(loaded_face);
 			document.body.style.fontFamily= `${INTERFACE_FONT}`;
 		});
-		this.startWaveButton = new Button( this.LeftEdge, 80, 100, 30, this.UIAtlas, "blue_button00.png", "Next Wave", `12px "${INTERFACE_FONT}", Arial`);	
+		this.startWaveButton = new Button( this.LeftEdge, 80, 100, 30, this.Atlases.UI.Blue, "blue_button00.png", "Next Wave", `12px "${INTERFACE_FONT}", Arial`);	
 	}
 
 	loadTrack( track )
 	{
 		this._track = track;
-		this.startWaveButton = new Button( this.LeftEdge, 80, 100, 30, this.UIAtlas, "blue_button00.png", "Next Wave", `12px "${INTERFACE_FONT}", Arial`);	
+		this.startWaveButton = new Button( this.LeftEdge, 80, 100, 30, this.Atlases.UI.Blue, "blue_button00.png", "Next Wave", `12px "${INTERFACE_FONT}", Arial`);	
 	}
 	
 	get Track()
@@ -37,9 +44,8 @@ export default class TrackInterface
 
 	get LeftEdge()
 	{
-		return this.Track 
-				? (this.Track.Map.TileWidth * this.Track.Map.MapTileWidth + this.Track.Map.TileWidth + 10) 
-				: 0;
+		return TILE_SIZE * 10;
+		//return this.Track ? (TILE_SIZE * this.Track.Map.MapTileWidth + this.Track.Map.TileWidth + 10) : 0;
 	}
 
 	update()
@@ -49,12 +55,14 @@ export default class TrackInterface
 
 	drawUI( ctx )
 	{
+		//Draw Side Panel
+		this.Atlases.UI.Grey.drawTexture( "grey_panel.png", ctx, this.LeftEdge, 0,TILE_SIZE*5,TILE_SIZE*10);
+
 		//Draw Title
-		let texture = this.UIAtlas.getTextureByName( "blue_panel.png" );
-		ctx.drawImage(this.UIAtlas.SpriteSheet, texture.x, texture.y, texture.w, texture.h,  this.LeftEdge, 0,250,50);
+		this.Atlases.UI.Blue.drawTexture( "blue_panel.png", ctx, this.LeftEdge, 0,TILE_SIZE*5,TILE_SIZE);		
 		ctx.font = `30px "${INTERFACE_FONT}", Arial`;
 		ctx.fillStyle = "#0000FF";
-		ctx.fillText( this.Track.Name, this.LeftEdge + 15, 25, 250 );
+		ctx.fillText( this.Track.Name, this.LeftEdge + TILE_SIZE / 4 , 25, 250 );
 		
 		//Draw Wave info
 		ctx.font = "12px Arial";
@@ -67,6 +75,7 @@ export default class TrackInterface
 			else
 				break;
 		}
+
 		let waveNum = lastIndexActive;
 		let waveinfo = (waveNum < this.Track.Waves.length) ? `Wave Hint: ${this.Track.Waves[ waveNum ].Hint}` : "[FINAL WAVE]";
 		ctx.fillText( waveinfo, this.LeftEdge+ 15, 40, 250 );	
@@ -75,15 +84,14 @@ export default class TrackInterface
 		this.startWaveButton.draw( ctx );
 
 		//Draw $
-		let moneyTexture = this.TDAtlas.getTextureByName("td_tile287.png");
-		ctx.drawImage(this.TDAtlas.SpriteSheet, moneyTexture.x, moneyTexture.y, moneyTexture.w, moneyTexture.h,  this.LeftEdge + 90, 60, moneyTexture.w, moneyTexture.h);
+		let moneyTexture = this.Atlases.TD.getTextureByName("td_tile287.png");
+		ctx.drawImage(this.Atlases.TD.SpriteSheet, moneyTexture.x, moneyTexture.y, moneyTexture.w, moneyTexture.h,  this.LeftEdge + 90, 60, moneyTexture.w, moneyTexture.h);
 		ctx.font = `30px "${INTERFACE_FONT}", Arial`;
 		ctx.fillStyle = "Goldenrod";
 		ctx.fillText( `${ this.Track.Money }`, this.LeftEdge + 150, 102 );
 		//
 
 	}
-
 
 	draw( ctx )
 	{
