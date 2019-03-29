@@ -2,6 +2,11 @@ import Track from './Track.js';
 import TrackInterface from './TrackInterface.js';
 
 export var DEBUG_MODE = true;
+export var DEBUG_TICK = 200;
+export var DEBUG_LAST_TICK = 0;
+
+export const TILE_SIZE = 64;
+
 export var game_time = 0;
 export var cnvs;
 
@@ -100,7 +105,21 @@ class TDGame
     draw()
     {
         this.ctx.fillStyle = "#fff";
-        this.ctx.clearRect( 0,0,this.canvas.width, this.canvas.height);
+        this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height);
+
+        if( DEBUG_MODE )
+        {
+            for( let i = 0; i < canvas.width; i += TILE_SIZE )
+            {
+                for( let j = 0; j < canvas.height; j += TILE_SIZE )
+                {
+                    this.ctx.strokeStyle = "#EEE";
+                    this.ctx.rect( i, j, TILE_SIZE, TILE_SIZE);
+                }
+            }
+            this.ctx.stroke();
+        }
+        
         this.trackInterface.draw( this.ctx );
     }
 }
