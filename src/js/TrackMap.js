@@ -14,6 +14,11 @@ export default class TrackMap
 		
 		this.MapTileWidth = json.map_tile_width;
 		this.MapTileHeight = json.map_tile_height;
+
+		this.offset = {
+			x: parseInt(json.tile_offset_x) * this.TileWidth,
+			y: parseInt(json.tile_offset_y) * this.TileHeight
+		}
 		
 		this.width = this.TileWidth * this.MapTileWidth;
 		this.height = this.TileHeight * this.MapTileHeight;
@@ -25,6 +30,7 @@ export default class TrackMap
 		this.PathTiles = [];
 		this.Path = [];
 		this.ObjectTiles = [];
+
 	}
 
 	LoadTiles()
@@ -93,10 +99,10 @@ export default class TrackMap
 		for( let i = 0; i < tileCount; i++)
 		{
 			var curTerrain = this.TerrainTiles[i];
-			var texture = this.Atlas.getTextureByName( curTerrain.texture_name );
 			
 			//Draw the terrain 
-			ctx.drawImage(this.Atlas.SpriteSheet, texture.x, texture.y, texture.w, texture.h,  curTerrain.x, curTerrain.y, this.TileWidth, this.TileHeight);
+			this.Atlas.drawTexture( curTerrain.texture_name, ctx, 
+				curTerrain.x + this.offset.x, curTerrain.y+ this.offset.y, this.TileWidth, this.TileHeight);
 			
 			//Debug tile border and tile name
 			if (typeof DEBUG_MODE !== 'undefined' && DEBUG_MODE === true) {
@@ -147,8 +153,8 @@ export default class TrackMap
 		for( let i = 0; i < pathCount; i++ )
 		{
 			const curPath = this.PathTiles[i];
-			texture = this.Atlas.getTextureByName( curPath.texture_name );
-			ctx.drawImage(this.Atlas.SpriteSheet, texture.x, texture.y, texture.w, texture.h,  curPath.x, curPath.y, this.TileWidth, this.TileHeight);
+			this.Atlas.drawTexture( curPath.texture_name, ctx, 
+				curPath.x+ this.offset.x, curPath.y+ this.offset.y, this.TileWidth, this.TileHeight);
 		}
 		
 		//Render the objects
@@ -156,8 +162,7 @@ export default class TrackMap
 		for( let i = 0; i < objCount; i++ )
 		{
 			const curObj = this.ObjectTiles[i];
-			texture = this.Atlas.getTextureByName( curObj.texture_name );
-			ctx.drawImage(this.Atlas.SpriteSheet, texture.x, texture.y, texture.w, texture.h,  curObj.x, curObj.y, this.TileWidth, this.TileHeight);
+			this.Atlas.drawTexture( curObj.texture_name, ctx, curObj.x+ this.offset.x, curObj.y+ this.offset.y, this.TileWidth, this.TileHeight);
 		}
 		
 	}
