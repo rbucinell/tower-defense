@@ -54,8 +54,7 @@ class TDGame
     loadTrack( json )
     {
         this.currentTrack = new Track( json );
-        this.trackInterface = new TrackInterface( this.canvas);
-        this.trackInterface.loadTrack( this.currentTrack);
+        this.trackInterface = new TrackInterface( this.canvas, this.currentTrack);
     }
 
     startup( trackFile)
@@ -66,7 +65,7 @@ class TDGame
                 this.loadTrack( json );
                 this.IsRunning = true;
                 this._intervalID = setInterval( this.loop, 1000 / this._framerate );
-		    });
+        });
     }
 
     start()

@@ -6,10 +6,16 @@ export const {INTERFACE_FONT} = "Kenney Future Narrow";
 
 export default class TrackInterface
 {
-	constructor( canvas)
+	constructor( canvas, track )
 	{
-		this.canvas = canvas;
-		this._track = null;
+        this.canvas = canvas;
+        this._track = track;
+        
+        this.settings = {
+            panel : {
+                padding: 10
+            }
+        };
 		this.Atlases = {
 			"TD" : new Atlas( "img/towerDefense_tilesheet.png", "data/tower_defense_spritesheet.xml"),
 			"UI" :
@@ -23,13 +29,7 @@ export default class TrackInterface
 			document.fonts.add(loaded_face);
 			document.body.style.fontFamily= `${INTERFACE_FONT}`;
 		});
-		this.startWaveButton = new Button( this.LeftEdge, 80, 100, 30, this.Atlases.UI.Blue, "blue_button00.png", "Next Wave", `12px "${INTERFACE_FONT}", Arial`);	
-	}
-
-	loadTrack( track )
-	{
-		this._track = track;
-		this.startWaveButton = new Button( this.LeftEdge, 80, 100, 30, this.Atlases.UI.Blue, "blue_button00.png", "Next Wave", `12px "${INTERFACE_FONT}", Arial`);	
+		this.startWaveButton = new Button( this.LeftEdge + this.settings.panel.padding, 80, 100, 30, this.Atlases.UI.Blue, "blue_button00.png", "Next Wave", `12px "${INTERFACE_FONT}", Arial`);	
 	}
 	
 	get Track()
@@ -44,7 +44,8 @@ export default class TrackInterface
 
 	get LeftEdge()
 	{
-		return TILE_SIZE * 10;
+        return this.Track.Map.MapTileWidth * TILE_SIZE +  this.Track.offset.x * 2;
+        //return TILE_SIZE * 10;
 		//return this.Track ? (TILE_SIZE * this.Track.Map.MapTileWidth + this.Track.Map.TileWidth + 10) : 0;
 	}
 
@@ -83,13 +84,15 @@ export default class TrackInterface
 		//Draw Next wave
 		this.startWaveButton.draw( ctx );
 
-		//Draw $
-		let moneyTexture = this.Atlases.TD.getTextureByName("td_tile287.png");
-		ctx.drawImage(this.Atlases.TD.SpriteSheet, moneyTexture.x, moneyTexture.y, moneyTexture.w, moneyTexture.h,  this.LeftEdge + 90, 60, moneyTexture.w, moneyTexture.h);
-		ctx.font = `30px "${INTERFACE_FONT}", Arial`;
-		ctx.fillStyle = "Goldenrod";
-		ctx.fillText( `${ this.Track.Money }`, this.LeftEdge + 150, 102 );
-		//
+        //Draw $
+        if( this.Atlases.TD.fullyloaded)
+        {
+            let moneyTexture = this.Atlases.TD.getTextureByName("td_tile287.png");
+            ctx.drawImage(this.Atlases.TD.SpriteSheet, moneyTexture.x, moneyTexture.y, moneyTexture.w, moneyTexture.h,  this.LeftEdge + 90, 60, moneyTexture.w, moneyTexture.h);
+            ctx.font = `30px "${INTERFACE_FONT}", Arial`;
+            ctx.fillStyle = "Goldenrod";
+            ctx.fillText( `${ this.Track.Money }`, this.LeftEdge + 150, 102 );
+		}
 
 	}
 
