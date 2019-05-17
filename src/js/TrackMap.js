@@ -5,7 +5,7 @@ var DEBUG_MODE = true;
 export default class TrackMap
 {
 
-	constructor( json )
+	constructor( json , offset, spawn)
 	{
 		this.json = json;
 		this.Atlas = new Atlas( json.atlas_map, json.atlas_data, this);
@@ -15,10 +15,8 @@ export default class TrackMap
 		this.MapTileWidth = json.map_tile_width;
 		this.MapTileHeight = json.map_tile_height;
 
-		this.offset = {
-			x: parseInt(json.tile_offset_x) * this.TileWidth,
-			y: parseInt(json.tile_offset_y) * this.TileHeight
-		}
+        this.offset = offset;
+        this.spawn = spawn;
 		
 		this.width = this.TileWidth * this.MapTileWidth;
 		this.height = this.TileHeight * this.MapTileHeight;
@@ -82,9 +80,10 @@ export default class TrackMap
 		}
 	}
 
-	draw( ctx )
-	{
-		//Render Order: Background -> terrain -> path -> objects
+
+    drawBackground( ctx )
+    {
+        //Render Order: Background -> terrain -> path -> objects
 	
 		//Render the Background
 		ctx.fillStyle = this.BaseColor;
@@ -155,7 +154,12 @@ export default class TrackMap
 			const curPath = this.PathTiles[i];
 			this.Atlas.drawTexture( curPath.texture_name, ctx, 
 				curPath.x+ this.offset.x, curPath.y+ this.offset.y, this.TileWidth, this.TileHeight);
-		}
+        }
+    }
+
+	drawForeground( ctx )
+	{
+        this.Atlas.drawTexture( "mapTile_114.png", ctx, this.spawn.x - this.TileWidth/2, this.spawn.y, this.TileWidth, this.TileHeight);
 		
 		//Render the objects
 		const objCount = this.ObjectTiles.length;
