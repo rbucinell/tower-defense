@@ -12,7 +12,7 @@ export default class Atlas
 		
 		this.SpriteSheet = new Image();
 		this.loadSpritsheet(spriteSheet, dataFile, trackMapReference);
-		gAtlases.push( this );
+        gAtlases.push( this );
 
 	}
 
@@ -86,7 +86,8 @@ export default class Atlas
 	 */
 	drawTexture(texture_name, ctx, x, y, w, h )
 	{
-		const texture = this.getTextureByName( texture_name );
-		ctx.drawImage(this.SpriteSheet, texture.x, texture.y, texture.w, texture.h, x, y, w, h);		
+        const texture = this.getTextureByName( texture_name );
+        if( texture )
+		    ctx.drawImage(this.SpriteSheet, texture.x, texture.y, texture.w, texture.h, x, y, w, h);		
 	}
 }
