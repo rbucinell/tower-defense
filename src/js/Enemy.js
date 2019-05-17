@@ -110,7 +110,7 @@ export class Enemy extends Entity
      */
     draw( ctx )
     {
-        if( !this.Despawn)
+        if( !this.Despawn && this.isMoving)
         {
             ctx.fillStyle = this.Color;
             ctx.fillRect(this.pos.x, this.pos.y, this.w, this.h);
