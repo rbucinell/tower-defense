@@ -88,12 +88,11 @@ export default class TrackInterface
         if( this.Atlases.TD.fullyloaded)
         {
             let moneyTexture = this.Atlases.TD.getTextureByName("td_tile287.png");
-            ctx.drawImage(this.Atlases.TD.SpriteSheet, moneyTexture.x, moneyTexture.y, moneyTexture.w, moneyTexture.h,  this.LeftEdge + 90, 60, moneyTexture.w, moneyTexture.h);
+            ctx.drawImage(this.Atlases.TD.SpriteSheet, moneyTexture.x, moneyTexture.y, moneyTexture.w, moneyTexture.h,  this.LeftEdge + 100, 60, moneyTexture.w, moneyTexture.h);
             ctx.font = `30px "${INTERFACE_FONT}", Arial`;
             ctx.fillStyle = "Goldenrod";
-            ctx.fillText( `${ this.Track.Money }`, this.LeftEdge + 150, 102 );
+            ctx.fillText( `${ this.Track.Money }`, this.LeftEdge + 155, 105 );
 		}
-
 	}
 
 	draw( ctx )
