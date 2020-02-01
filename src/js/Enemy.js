@@ -27,6 +27,10 @@ export class Enemy extends Entity
         this.Despawn = false;
 
         this.bounty = 1;
+
+        this.sfx = {
+            "hit": new Audio("audio/sfx/sfx_damage_hit1.wav")
+        };
     }
 
     set Path ( path )
@@ -51,6 +55,7 @@ export class Enemy extends Entity
             enemyKilledEvent(this);
             this.Despawn = true;
         }
+        this.sfx.hit.play();
     }
 
     /**
@@ -105,7 +110,7 @@ export class Enemy extends Entity
      */
     draw( ctx )
     {
-        if( !this.Despawn)
+        if( !this.Despawn && this.isMoving)
         {
             ctx.fillStyle = this.Color;
             ctx.fillRect(this.pos.x, this.pos.y, this.w, this.h);

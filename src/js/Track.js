@@ -8,30 +8,39 @@ export default class Track
 {
     constructor( json )
     {
+        const tileWidth = parseInt( json.map.tile_width );
+        const tileHeight = parseInt( json.map.tile_height );
+        
+        this.offset = {
+			x: parseInt(json.map_offset_x) * tileWidth,
+			y: parseInt(json.map_offset_y) * tileHeight
+		};
+        
+        const spawn = {
+            x: parseInt( json.map.path.spawn.x ) * tileWidth + tileWidth / 2 + this.offset.x,
+            y: parseInt( json.map.path.spawn.y ) * tileHeight + tileHeight / 2+ this.offset.y
+        }
+
         this._name = json.name;
         this._difficutly = json._difficutly;
-        this._map = new TrackMap( json.map );
+
+        
+
+        this._map = new TrackMap( json.map, this.offset, spawn );
         this._path = [];
         this._waves = [];
         this._waveEnemies = [];
         this._curWave = 0;
         this._towers = []
         this._money = 20;
-        
-        var tileWidth = parseInt( json.map.tile_width );
-        var tileHeight = parseInt( json.map.tile_height );
-
-        var spawn = {
-            x: parseInt( json.map.path.spawn.x ) * tileWidth + tileWidth / 2,
-            y: parseInt( json.map.path.spawn.y ) * tileHeight + tileHeight / 2
-        }
+                
         this.Path.push( spawn );
 
         for( var p of json.map.path.tiles )
         {
             var curPath = {
-                x: parseInt( p.x ) * ( tileWidth ) + tileWidth / 2,
-                y: parseInt( p.y ) * ( tileHeight ) + tileHeight / 2
+                x: parseInt( p.x ) * ( tileWidth ) + tileWidth / 2 + this.offset.x,
+                y: parseInt( p.y ) * ( tileHeight ) + tileHeight / 2 + this.offset.y
             }
             this.Path.push( curPath );
             //this.Path.push( json.map.path.tiles[p] );
@@ -162,8 +171,9 @@ export default class Track
 
     draw( ctx )
     {
-        this.Map.draw( ctx );
+        this.Map.drawBackground( ctx );
         this.Waves.forEach( w => w.draw(ctx) );
+        this.Map.drawForeground( ctx );
         this.Towers.forEach( t => t.draw( ctx ));
     }
 }

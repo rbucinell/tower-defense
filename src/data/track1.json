@@ -1,14 +1,15 @@
 {
     "name": "Intro Track",
     "difficulty": "1",
+    "map_offset_x": "1",
+    "map_offset_y": "1",
     "map": {
         "atlas_map": "img/map_spritesheet.png",
         "atlas_data": "data/map_spritesheet.xml",
         "tile_width": "64",
         "tile_height": "64",
-        "map_tile_width": "7",
-        "map_tile_height": "7",
-
+        "map_tile_width": "8",
+        "map_tile_height": "8",
         "base_color": "lightcyan",
         "background_img": "img/track1.png",
         "terrain": [
@@ -148,14 +149,7 @@
             "enemies": [
                 { "type": "red", "qty": "1" }
             ]
-        },        
-        {
-            "name": "Wave 0.5",
-            "hint": "Just a test, 1 loley soldier",
-            "enemies": [
-                { "type": "red", "qty": "2" }
-            ]
-        }, 
+        },     
         {
             "name": "Wave 1",
             "hint": "Stop all enemies from reaching your base!",

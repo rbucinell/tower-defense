@@ -1,0 +1,13 @@
+{
+    "towers":[
+        {
+            "name" : "basic",
+            "cost" : 5,
+            "color": "#0000FF",
+            "images" : {
+                "base": "",
+                "turret": ""
+            }
+        }
+    ]
+}
