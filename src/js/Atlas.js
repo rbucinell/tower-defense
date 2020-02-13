@@ -52,10 +52,10 @@ export default class Atlas
 		Array.from(elements).forEach( e =>{
 			this.Textures.push( new Texture( 
 				e.attributes['name'].value,
-				parseInt(e.attributes['x'].value),
-				parseInt(e.attributes['y'].value),
-				parseInt(e.attributes['width'].value),
-				parseInt(e.attributes['height'].value),
+				parseInt(e.attributes['x'].value, 10),
+				parseInt(e.attributes['y'].value, 10),
+				parseInt(e.attributes['width'].value, 10),
+				parseInt(e.attributes['height'].value, 10),
 			this));
 		});
 		this.fullyloaded = true;

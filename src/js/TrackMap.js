@@ -9,8 +9,8 @@ export default class TrackMap
 	{
 		this.json = json;
 		this.Atlas = new Atlas( json.atlas_map, json.atlas_data, this);
-		this.TileWidth = parseInt( json.tile_width );
-		this.TileHeight = parseInt(json.tile_height);
+		this.TileWidth = parseInt( json.tile_width, 10 );
+		this.TileHeight = parseInt(json.tile_height, 10);
 		
 		this.MapTileWidth = json.map_tile_width;
 		this.MapTileHeight = json.map_tile_height;
