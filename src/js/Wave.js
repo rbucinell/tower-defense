@@ -51,7 +51,7 @@ export default class Wave
 			if( !e.isMoving )
 				if( e.StartTime < game_time ) 
 					this.Enemies[i].isMoving = true;
-			if( (typeof e === 'undefined' || e.AtGoal || e.Health <= 0) && e.Despawn == false)
+			if( (typeof e === 'undefined' || e.AtGoal || e.Health <= 0) && e.Despawn === false)
 			{
 				this.Enemies[i].Despawn = true;
 			}
