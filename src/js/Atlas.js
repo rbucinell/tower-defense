@@ -70,7 +70,7 @@ export default class Atlas
 	 */
 	getTextureByName( textureName )
 	{
-		return this.Textures.filter( t => t.Name == textureName )[0];
+		return this.Textures.filter( t => t.Name === textureName )[0];
 	}
 
 	/**
