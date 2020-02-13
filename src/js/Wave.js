@@ -38,7 +38,6 @@ export default class Wave
 	{
 		this.waveStartTime = game_time;
 		this.isStarted = true;
-		console.log( 'Wave', waveNum, 'started');
 		this.Enemies.forEach( (e, i) => e.StartTime = this.delay * i + this.waveStartTime );
 	}
 
