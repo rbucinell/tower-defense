@@ -8,17 +8,17 @@ export default class Track
 {
     constructor( json )
     {
-        const tileWidth = parseInt( json.map.tile_width );
-        const tileHeight = parseInt( json.map.tile_height );
+        const tileWidth  = parseInt( json.map.tile_width, 10 );
+        const tileHeight = parseInt( json.map.tile_height, 10 );
         
         this.offset = {
-			x: parseInt(json.map_offset_x) * tileWidth,
-			y: parseInt(json.map_offset_y) * tileHeight
+			x: parseInt(json.map_offset_x, 10) * tileWidth,
+			y: parseInt(json.map_offset_y, 10) * tileHeight
 		};
         
         const spawn = {
-            x: parseInt( json.map.path.spawn.x ) * tileWidth + tileWidth / 2 + this.offset.x,
-            y: parseInt( json.map.path.spawn.y ) * tileHeight + tileHeight / 2+ this.offset.y
+            x: parseInt( json.map.path.spawn.x, 10 ) * tileWidth + tileWidth / 2 + this.offset.x,
+            y: parseInt( json.map.path.spawn.y, 10 ) * tileHeight + tileHeight / 2+ this.offset.y
         }
 
         this._name = json.name;
@@ -38,12 +38,10 @@ export default class Track
 
         for( var p of json.map.path.tiles )
         {
-            var curPath = {
-                x: parseInt( p.x ) * ( tileWidth ) + tileWidth / 2 + this.offset.x,
-                y: parseInt( p.y ) * ( tileHeight ) + tileHeight / 2 + this.offset.y
-            }
-            this.Path.push( curPath );
-            //this.Path.push( json.map.path.tiles[p] );
+            this.Path.push({
+                x: parseInt( p.x, 10 ) * ( tileWidth ) + tileWidth / 2 + this.offset.x,
+                y: parseInt( p.y, 10 ) * ( tileHeight ) + tileHeight / 2 + this.offset.y
+            });
         }
 
         for( var w of json.waves )

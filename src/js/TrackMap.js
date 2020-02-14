@@ -9,8 +9,8 @@ export default class TrackMap
 	{
 		this.json = json;
 		this.Atlas = new Atlas( json.atlas_map, json.atlas_data, this);
-		this.TileWidth = parseInt( json.tile_width );
-		this.TileHeight = parseInt(json.tile_height);
+		this.TileWidth = parseInt( json.tile_width, 10 );
+		this.TileHeight = parseInt(json.tile_height, 10);
 		
 		this.MapTileWidth = json.map_tile_width;
 		this.MapTileHeight = json.map_tile_height;
@@ -98,9 +98,9 @@ export default class TrackMap
 		for( let i = 0; i < tileCount; i++)
 		{
 			var curTerrain = this.TerrainTiles[i];
-			
+			let textureName = curTerrain["texture_name"];
 			//Draw the terrain 
-			this.Atlas.drawTexture( curTerrain.texture_name, ctx, 
+			this.Atlas.drawTexture( textureName, ctx, 
 				curTerrain.x + this.offset.x, curTerrain.y+ this.offset.y, this.TileWidth, this.TileHeight);
 			
 			//Debug tile border and tile name
@@ -111,7 +111,7 @@ export default class TrackMap
 				
 				ctx.fillStyle = "black";
 				ctx.font = "8px Arial";
-				const tileNumber = curTerrain.texture_name.substring( 8, curTerrain.texture_name.length-4);
+				const tileNumber = textureName.substring( 8, textureName.length-4);
 				ctx.fillText(tileNumber ,curTerrain.x, curTerrain.y+8); //y+8 is y+fontsize
 			}
 		}
@@ -137,17 +137,16 @@ export default class TrackMap
 			const prev = this.Path[i-1];
 			const cur = this.Path[i];
 			ctx.moveTo(prev.x, prev.y);
-			ctx.lineTo(cur.x, cur.y);			
+			ctx.lineTo(cur.x, cur.y);
 		}
 		ctx.stroke();
-
 
 		ctx.lineWidth = settings.lineWidth;
 		ctx.setLineDash( settings.lineDash );
 		ctx.strokeStyle = settings.strokeStyle;
 		*/
 		
-		 //Draw using the Map tiles
+		//Draw using the Map tiles
 		const pathCount = this.PathTiles.length;
 		for( let i = 0; i < pathCount; i++ )
 		{
@@ -159,7 +158,7 @@ export default class TrackMap
 
 	drawForeground( ctx )
 	{
-        this.Atlas.drawTexture( "mapTile_114.png", ctx, this.spawn.x - this.TileWidth/2, this.spawn.y, this.TileWidth, this.TileHeight);
+		this.Atlas.drawTexture( "mapTile_114.png", ctx, this.spawn.x - this.TileWidth/2, this.spawn.y, this.TileWidth, this.TileHeight);
 		
 		//Render the objects
 		const objCount = this.ObjectTiles.length;

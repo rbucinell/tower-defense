@@ -7,7 +7,7 @@ export var DEBUG_LAST_TICK = 0;
 
 export const TILE_SIZE = 64;
 
-export var game_time = 0;
+export var gameTime = 0;
 export var cnvs;
 
 /**
@@ -82,13 +82,13 @@ class TDGame
 
     shutdown()
     {        
-        game_time = 0;
+        gameTime = 0;
     }
 
     loop()
     {
         const _this = this.game;
-        game_time++;
+        gameTime++;
         if( _this.IsRunning )
         {
             _this.update();

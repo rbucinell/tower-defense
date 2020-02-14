@@ -1,6 +1,6 @@
-import Button from './Button.js'
-import Atlas from './Atlas.js'
-import {TILE_SIZE} from './main.js'
+import Button from './Button.js';
+import Atlas from './Atlas.js';
+import {TILE_SIZE} from './main.js';
 
 export const {INTERFACE_FONT} = "Kenney Future Narrow";
 
@@ -116,8 +116,9 @@ TrackInterface.prototype.handleMouseUp = function( event )
 	
 	if( this.startWaveButton.hitTest( mX, mY ) )
 	{
-		console.log( this.Track.CurrentWave, this.Track.Waves.length)
 		if( this.Track.CurrentWave <=  this.Track.Waves.length -1 )
+		{
 			this.Track.nextWave();
+		}
 	}
 }

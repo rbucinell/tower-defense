@@ -52,10 +52,10 @@ export default class Atlas
 		Array.from(elements).forEach( e =>{
 			this.Textures.push( new Texture( 
 				e.attributes['name'].value,
-				parseInt(e.attributes['x'].value),
-				parseInt(e.attributes['y'].value),
-				parseInt(e.attributes['width'].value),
-				parseInt(e.attributes['height'].value),
+				parseInt(e.attributes['x'].value, 10),
+				parseInt(e.attributes['y'].value, 10),
+				parseInt(e.attributes['width'].value, 10),
+				parseInt(e.attributes['height'].value, 10),
 			this));
 		});
 		this.fullyloaded = true;
@@ -70,13 +70,13 @@ export default class Atlas
 	 */
 	getTextureByName( textureName )
 	{
-		return this.Textures.filter( t => t.Name == textureName )[0];
+		return this.Textures.filter( t => t.Name === textureName )[0];
 	}
 
 	/**
 	 * Retrieves a texture from the atlas and draws it to the canvas
 	 *
-	 * @param {string} texture_name name of the texture to draw
+	 * @param {string} textureName name of the texture to draw
 	 * @param {CanvasRenderingContext2D} ctx the current 2d context of the canvas
 	 * @param {Number} x	the x cordinate location of where to draw the texture
 	 * @param {Number} y the y cordinate location of where to draw the texture
@@ -84,9 +84,9 @@ export default class Atlas
 	 * @param {Number} h the height of the drawn texture
 	 * @memberof Atlas
 	 */
-	drawTexture(texture_name, ctx, x, y, w, h )
+	drawTexture(textureName, ctx, x, y, w, h )
 	{
-        const texture = this.getTextureByName( texture_name );
+        const texture = this.getTextureByName( textureName );
         if( texture )
 		    ctx.drawImage(this.SpriteSheet, texture.x, texture.y, texture.w, texture.h, x, y, w, h);		
 	}

@@ -1,5 +1,5 @@
-import {EnemyFactory} from './Enemy.js'
-import {game_time} from './main.js'
+import {EnemyFactory} from './Enemy.js';
+import {gameTime} from './main.js';
 
 export default class Wave
 {
@@ -16,9 +16,11 @@ export default class Wave
 		this.waveStartTime = -1;
 
 		//Create enemies in wave
-		jsonobj.enemies.forEach( e =>{
+		jsonobj.enemies.forEach( e => {
 			for( let i = 0; i < e.qty; i++ )
+			{
 				this.Enemies.push( EnemyFactory.createEnemy( e.type, this.Parent.Path));
+			}
 		});
 		
 		this.enemyIndex = 0;
@@ -36,9 +38,8 @@ export default class Wave
 	 */
 	startWave( waveNum )
 	{
-		this.waveStartTime = game_time;
+		this.waveStartTime = gameTime;
 		this.isStarted = true;
-		console.log( 'Wave', waveNum, 'started');
 		this.Enemies.forEach( (e, i) => e.StartTime = this.delay * i + this.waveStartTime );
 	}
 
@@ -49,9 +50,9 @@ export default class Wave
 			
 		this.Enemies.forEach( (e,i) => {
 			if( !e.isMoving )
-				if( e.StartTime < game_time ) 
+				if( e.StartTime < gameTime ) 
 					this.Enemies[i].isMoving = true;
-			if( (typeof e === 'undefined' || e.AtGoal || e.Health <= 0) && e.Despawn == false)
+			if( (typeof e === 'undefined' || e.AtGoal || e.Health <= 0) && e.Despawn === false)
 			{
 				this.Enemies[i].Despawn = true;
 			}
