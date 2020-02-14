@@ -68,8 +68,10 @@ export class Enemy extends Entity
     {
         let center = this.center();
         //don't move until flagged to go
-        if( !this.isMoving )
+        if( !this.isMoving ) 
+        {
             return;
+        }
         
         //check if dead or at goal
         if( this.AtGoal || this.hp <= 0 )
@@ -79,17 +81,17 @@ export class Enemy extends Entity
         }
         
         //update the direction vector
-        const next_vec = new Vector2D( this.Path[this.curTarget].x, this.Path[this.curTarget].y);
-        this.dir = Vector2D.normal( Vector2D.sub(this.center(), next_vec));
+        const nextVec = new Vector2D( this.Path[this.curTarget].x, this.Path[this.curTarget].y);
+        this.dir = Vector2D.normal( Vector2D.sub(this.center(), nextVec));
 
         //determine velocity
-        const dist = Vector2D.dist( next_vec, this.center());
+        const dist = Vector2D.dist( nextVec, this.center());
         let velocity = this.dir;
         velocity.multiplyScalar( dist <= this.spd ? dist : this.spd );
         this.pos = Vector2D.add( this.pos, velocity );
 
-        const xdist = Math.abs( center.x - next_vec.x );
-        const ydist = Math.abs( center.y - next_vec.y );
+        const xdist = Math.abs( center.x - nextVec.x );
+        const ydist = Math.abs( center.y - nextVec.y );
 
         if( xdist <= this.w/4 && ydist <= this.w/4)
         {

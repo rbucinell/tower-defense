@@ -38,12 +38,10 @@ export default class Track
 
         for( var p of json.map.path.tiles )
         {
-            var curPath = {
+            this.Path.push({
                 x: parseInt( p.x, 10 ) * ( tileWidth ) + tileWidth / 2 + this.offset.x,
                 y: parseInt( p.y, 10 ) * ( tileHeight ) + tileHeight / 2 + this.offset.y
-            }
-            this.Path.push( curPath );
-            //this.Path.push( json.map.path.tiles[p] );
+            });
         }
 
         for( var w of json.waves )

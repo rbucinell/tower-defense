@@ -137,17 +137,16 @@ export default class TrackMap
 			const prev = this.Path[i-1];
 			const cur = this.Path[i];
 			ctx.moveTo(prev.x, prev.y);
-			ctx.lineTo(cur.x, cur.y);			
+			ctx.lineTo(cur.x, cur.y);
 		}
 		ctx.stroke();
-
 
 		ctx.lineWidth = settings.lineWidth;
 		ctx.setLineDash( settings.lineDash );
 		ctx.strokeStyle = settings.strokeStyle;
 		*/
 		
-		 //Draw using the Map tiles
+		//Draw using the Map tiles
 		const pathCount = this.PathTiles.length;
 		for( let i = 0; i < pathCount; i++ )
 		{
@@ -159,7 +158,7 @@ export default class TrackMap
 
 	drawForeground( ctx )
 	{
-        this.Atlas.drawTexture( "mapTile_114.png", ctx, this.spawn.x - this.TileWidth/2, this.spawn.y, this.TileWidth, this.TileHeight);
+		this.Atlas.drawTexture( "mapTile_114.png", ctx, this.spawn.x - this.TileWidth/2, this.spawn.y, this.TileWidth, this.TileHeight);
 		
 		//Render the objects
 		const objCount = this.ObjectTiles.length;
