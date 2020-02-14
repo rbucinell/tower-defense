@@ -1,7 +1,7 @@
 import Entity from './Entity.js';
 import Vector2D from './lib/Vector2D.js';
 import Bullet from './Bullet.js';
-import { game_time } from './main.js';
+import { gameTime } from './main.js';
 
 /**
  * Standard class for a tower
@@ -54,7 +54,7 @@ export class Tower extends Entity
             this.dir = Vector2D.normal(Vector2D.sub( this.center(),first.center()));
             
             //fire at enemy
-            if( this.lastfiretime === null ||  game_time - this.lastfiretime > this.fire_rate )
+            if( this.lastfiretime === null ||  gameTime - this.lastfiretime > this.fire_rate )
             {
                 this.dir = this.aimAt( first );
                 this.fireBullet();
@@ -96,7 +96,7 @@ export class Tower extends Entity
         let b = new Bullet();
         b.spawn( this.center(), this.dir, this.bullet_speed);
         this.bullets.push( b );
-        this.lastfiretime = game_time;
+        this.lastfiretime = gameTime;
     }
 
     draw( ctx ) 
