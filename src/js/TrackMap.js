@@ -98,9 +98,9 @@ export default class TrackMap
 		for( let i = 0; i < tileCount; i++)
 		{
 			var curTerrain = this.TerrainTiles[i];
-			
+			let textureName = curTerrain["texture_name"];
 			//Draw the terrain 
-			this.Atlas.drawTexture( curTerrain.texture_name, ctx, 
+			this.Atlas.drawTexture( textureName, ctx, 
 				curTerrain.x + this.offset.x, curTerrain.y+ this.offset.y, this.TileWidth, this.TileHeight);
 			
 			//Debug tile border and tile name
@@ -111,7 +111,7 @@ export default class TrackMap
 				
 				ctx.fillStyle = "black";
 				ctx.font = "8px Arial";
-				const tileNumber = curTerrain.texture_name.substring( 8, curTerrain.texture_name.length-4);
+				const tileNumber = textureName.substring( 8, textureName.length-4);
 				ctx.fillText(tileNumber ,curTerrain.x, curTerrain.y+8); //y+8 is y+fontsize
 			}
 		}

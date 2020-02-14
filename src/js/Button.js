@@ -9,14 +9,14 @@ const ButtonState =
 
 export default class Button
 {
-	constructor( x, y, w, h, atlas, texture_name, text, font )
+	constructor( x, y, w, h, atlas, textureName, text, font )
 	{
 		this.x = x;
 		this.y = y;
 		this.w = w;
 		this.h = h;
 		this.Atlas = atlas;
-		this.texture_name = texture_name;
+		this.textureName = textureName;
 		this.text = text;
 		this.font = font;
 	}
