@@ -23,9 +23,6 @@ export default class Track
 
         this._name = json.name;
         this._difficutly = json._difficutly;
-
-        
-
         this._map = new TrackMap( json.map, this.offset, spawn );
         this._path = [];
         this._waves = [];
@@ -33,6 +30,7 @@ export default class Track
         this._curWave = 0;
         this._towers = []
         this._money = 20;
+        this._lives = 50;
                 
         this.Path.push( spawn );
 
@@ -51,11 +49,12 @@ export default class Track
         this._waveEnemies = this._waves[ this.CurrentWave ].Enemies;
 
         document.addEventListener( GameEvents.ENEMY_KILLED, (e) => this.Money += e.detail.enemy.bounty );
+        document.addEventListener( GameEvents.ENEMY_REACHED_GOAL, (e) => this.Lives -= e.detail.enemy.damage );
 
         //testing
         let t = new Tower();
         t.pos = new Vector2D( 5.5 * tileWidth, 3.5 * tileHeight);
-        this.placeTower( t );
+        //this.placeTower( t );
     }
 
     placeTower( tower )
@@ -123,7 +122,16 @@ export default class Track
         this._money = val;
     }
 
+    get Lives()
+    {
+        return this._lives;
+    }
 
+    set Lives( val )
+    {
+        if( val < 0 ) val = 0;
+        this._lives = val;
+    }
 
     nextWave() 
     {

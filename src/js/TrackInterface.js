@@ -84,14 +84,22 @@ export default class TrackInterface
 		//Draw Next wave
 		this.startWaveButton.draw( ctx );
 
-        //Draw $
+        
         if( this.Atlases.TD.fullyloaded)
         {
+			//Draw $
             let moneyTexture = this.Atlases.TD.getTextureByName("td_tile287.png");
             ctx.drawImage(this.Atlases.TD.SpriteSheet, moneyTexture.x, moneyTexture.y, moneyTexture.w, moneyTexture.h,  this.LeftEdge + 100, 60, moneyTexture.w, moneyTexture.h);
             ctx.font = `30px "${INTERFACE_FONT}", Arial`;
             ctx.fillStyle = "Goldenrod";
-            ctx.fillText( `${ this.Track.Money }`, this.LeftEdge + 155, 105 );
+			ctx.fillText( `${ this.Track.Money }`, this.LeftEdge + 155, 105 );
+			
+			//Draw <3
+			let healthTexture = this.Atlases.TD.getTextureByName("td_tile289.png");
+			ctx.drawImage(this.Atlases.TD.SpriteSheet, healthTexture.x, healthTexture.y, healthTexture.w, healthTexture.h,  this.LeftEdge + 200, 60, healthTexture.w, healthTexture.h);
+            ctx.font = `30px "${INTERFACE_FONT}", Arial`;
+            ctx.fillStyle = "darkred";
+			ctx.fillText( `${ this.Track.Lives }`, this.LeftEdge + 255, 105 );
 		}
 	}
 

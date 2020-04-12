@@ -1,7 +1,8 @@
 
 export const GameEvents =
 {
-    ENEMY_KILLED: "enemeyKilled"
+    ENEMY_KILLED: "enemeyKilled",
+    ENEMY_REACHED_GOAL: "enemyReachedGoal",
 }
 
 /**
@@ -11,10 +12,23 @@ export const GameEvents =
  */
 export const enemyKilledEvent = function(e)
 {
-    const event = new CustomEvent( GameEvents.ENEMY_KILLED, {
+    document.dispatchEvent( new CustomEvent( GameEvents.ENEMY_KILLED, {
         detail :{
             enemy: e
         }
-    });
-    document.dispatchEvent( event );
+    }));
+}
+
+/**
+ * Custom event to announce when an Enemy Reaches player base
+ * @param {Evemy} e the Enemy tha reaches the goal
+ */
+export const enemyReachedGoal = function(e)
+{
+    console.log('boom')
+    document.dispatchEvent( new CustomEvent( GameEvents.ENEMY_REACHED_GOAL, {
+        detail:{
+            enemy: e
+        }
+    }));
 }
