@@ -60,7 +60,7 @@ class TDGame
     startup( trackFile)
     {
         fetch(trackFile)
-            .then((response) =>	response.json())
+            .then((response) => response.json())
             .then((json) => {
                 this.loadTrack( json );
                 this.IsRunning = true;
