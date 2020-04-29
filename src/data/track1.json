@@ -154,7 +154,8 @@
             "name": "Wave 1",
             "hint": "Stop all enemies from reaching your base!",
             "enemies": [
-                { "type": "red", "qty": "10" }
+                { "type": "red", "qty": "10" },
+                { "type": "orange", "qty": "5" }
             ]
         },
         {
@@ -162,7 +163,8 @@
             "hint": "Now with some variety",
             "enemies": [
                 { "type": "red", "qty": "10" },
-                { "type": "orange", "qty": "5" }
+                { "type": "orange", "qty": "5" },
+                { "type": "green", "qty": "1" }
             ]
         }
     ]
