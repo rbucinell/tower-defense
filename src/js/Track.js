@@ -1,7 +1,7 @@
 import TrackMap from './TrackMap.js'
 import Wave from './Wave.js'
 import Vector2D from './lib/Vector2D.js';
-import { Tower } from './Tower.js';
+import { Tower, TowerFactory } from './Tower.js';
 import {GameEvents} from './Events.js';
 
 export default class Track
@@ -12,9 +12,9 @@ export default class Track
         const tileHeight = parseInt( json.map.tile_height, 10 );
         
         this.offset = {
-			x: parseInt(json.map_offset_x, 10) * tileWidth,
-			y: parseInt(json.map_offset_y, 10) * tileHeight
-		};
+            x: parseInt(json.map_offset_x, 10) * tileWidth,
+            y: parseInt(json.map_offset_y, 10) * tileHeight
+        };
         
         const spawn = {
             x: parseInt( json.map.path.spawn.x, 10 ) * tileWidth + tileWidth / 2 + this.offset.x,
@@ -30,7 +30,7 @@ export default class Track
         this._curWave = 0;
         this._towers = []
         this._money = 20;
-        this._lives = 50;
+        this._lives = 30;
                 
         this.Path.push( spawn );
 
@@ -52,7 +52,8 @@ export default class Track
         document.addEventListener( GameEvents.ENEMY_REACHED_GOAL, (e) => this.Lives -= e.detail.enemy.damage );
 
         //testing
-        let t = new Tower();
+        TowerFactory.LoadConfig()
+        let t = TowerFactory.createTower('basic');
         t.pos = new Vector2D( 5.5 * tileWidth, 3.5 * tileHeight);
         //this.placeTower( t );
     }

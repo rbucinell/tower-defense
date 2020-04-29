@@ -126,3 +126,41 @@ export class Tower extends Entity
         this.bullets.forEach( b => b.draw( ctx ));
     }
 }
+
+class BasicTower extends Tower
+{
+    constructor()
+    {
+        super();
+    }
+
+    fireBullet() {
+        super.fireBullet();
+        console.log( 'basic fire');
+    }
+}
+
+
+export class TowerFactory
+{
+    static createTower( type ) {
+        var TowerClass = null;
+        if( type == "basic")
+        {
+            TowerClass = BasicTower;
+        }
+        return TowerClass;
+    }
+
+    static LoadConfig()
+    {
+        console.log( 'load towers');
+        fetch("data/towers.json")
+            .then(response => response.json())
+            .then( json => {
+                TowerFactory.config = json["towers"];
+            }
+        );
+    }
+}
+TowerFactory.config;
