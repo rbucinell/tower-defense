@@ -1,9 +1,9 @@
 import Track from './Track.js';
 import TrackInterface from './TrackInterface.js';
 
-export var DEBUG_MODE = true;
-export var DEBUG_TICK = 200;
-export var DEBUG_LAST_TICK = 0;
+export const DEBUG_MODE = true;
+export const DEBUG_TICK = 200;
+export const DEBUG_LAST_TICK = 0;
 
 export const TILE_SIZE = 64;
 
@@ -99,6 +99,7 @@ class TDGame
     update()
     {
         this.currentTrack.update();
+        this.trackInterface.update();
     }
 
     draw()
