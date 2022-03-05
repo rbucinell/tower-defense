@@ -34,7 +34,7 @@ export default class Atlas
                         const parser = (new DOMParser()).parseFromString(text, "application/xml");
                         this.ReadXml(parser); // eslint-disable-line
                         if( typeof trackMapReference !== 'undefined' )
-                            trackMapReference.LoadTiles();
+                            trackMapReference.loadTiles();
                     })
             );
     }
